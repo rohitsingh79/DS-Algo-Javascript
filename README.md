@@ -1,2 +1,2 @@
-# React-Course
-hands on small projects done during react learning
+# DS-Algo and javscript Notes
+company specific ds-algo and javascript notes
