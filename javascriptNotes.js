@@ -1,4 +1,4 @@
-
+//Notes for javascript
 // arrow function takes the this keyword lexically
 //normal function takes the this keyword with which it is bind to
 
