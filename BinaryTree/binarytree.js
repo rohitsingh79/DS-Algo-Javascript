@@ -1,10 +1,8 @@
-class Node
-{
-	constructor(item)
-	{
-		this.data = item;
-		this.left = this.right=null;
-	}
+class Node {
+    constructor(item) {
+        this.data = item;
+        this.left = this.right = null;
+    }
 }
 
 let root;
@@ -15,7 +13,7 @@ root.left.left = new Node(7);
 root.left.right = new Node(11);
 root.right.left = new Node(17);
 
-console.log(root)
+// console.log(root)
 
 // let secondLeft;
 // let secondRight;
@@ -29,11 +27,96 @@ console.log(root)
 // secondRight.left = new Node(4);
 // secondRight.right = new Node(3);
 
+//**************************************************************************************************************/
+// level order traversal using queue data structure
+
+function levelOrderTraversal(root) {
+    let q = [];
+    let curr;
+    q.push(root);
+    while (q.length > 0) {
+        curr = q.shift();
+        console.log(curr.data)
+        if (curr.left != null) {
+            q.push(curr.left);
+        }
+        if (curr.right) {
+            q.push(curr.right)
+        }
+    }
+}
+
+// console.log("level order traversal")
+// levelOrderTraversal(root)
+
+// inorder traversal
+//Left-->node-->Right
+function inOrderTraversal(root){
+    if(root==null){
+        return;
+    }
+    inOrderTraversal(root.left);
+    console.log(root.data);
+    inOrderTraversal(root.right);
+}
+// console.log('inorder traversal')
+// inOrderTraversal(root)
+
+// preorder traversal
+//node-->Left-->Right
+function preOrderTraversal(root){
+    if(root==null){
+        return;
+    }
+    console.log(root.data);
+    preOrderTraversal(root.left);
+    preOrderTraversal(root.right);
+}
+// console.log('pre order traversal')
+// preOrderTraversal(root)
+
+//post Order traversal
+//Left-->Right-->Node
+function postOrderTraversal(root){
+    if(root==null){
+        return;
+    }
+    
+    postOrderTraversal(root.left);
+    postOrderTraversal(root.right);
+    console.log(root.data);
+}
+// console.log('post order traversal')
+// postOrderTraversal(root)
+
+//**************************************************************************************************************/
+// find the number of leaf nodes
+// use inorder traversal
+
+let countOfLeafNodes = 0;
+function countLeafNodes(root){
+    function inOrderTraversal(root){
+
+        if(root==null){
+            return;
+        }
+        inOrderTraversal(root.left);
+        if(root.left === null && root.right=== null){
+            countOfLeafNodes++  
+        }
+        inOrderTraversal(root.right);
+    }
+ 
+    inOrderTraversal(root)
+}
+
+// countLeafNodes(root);
+// console.log('number of leaf nodes is',countOfLeafNodes )
 
 
 //**************************************************************************************************************/
 // // Iterative method to find height of Binary Tree or max depth
-// function findHeight(node){
+// function findHeightIteravtive(node){
 // if(node==null){
 //     return -1;
 // }
@@ -47,7 +130,7 @@ console.log(root)
 // q.push(node);
 // // console.log('pushed into the queue', q);
 // while(q.length>0){
-    
+
 //     let size = q.length;
 //     console.log('queue length', size);
 //     height = height+1;
@@ -68,9 +151,28 @@ console.log(root)
 
 // }
 
-// const height = findHeight(root)
+// const height = findHeightIteravtive(root)
 // console.log(height);
 
+
+//**************************************************************************************************************/
+// recursive  method to find height of Binary Tree or max depth
+// max(Left,Right +1)
+function findHeightRecursuve(node){
+    let height;
+    let left;
+    let right;
+
+if(node==null){
+    return 0;
+}
+left = findHeightRecursuve(node.left);
+right = findHeightRecursuve(node.right);
+height = Math.max(left , right) + 1
+return height;
+}
+
+console.log(findHeightRecursuve(root))
 //**************************************************************************************************************/
 // function to check if a binary tree is a binary search tree or not
 // function checkBinaryTree(root){
@@ -93,22 +195,26 @@ console.log(root)
 
 //**************************************************************************************************************/
 // function to check if a binary tree is a symmetrical tree or not recursive approach
-function checkSymmetry(root){
+function checkSymmetry(root) {
 
-   function isSymmetry(node1 , node2){
-       if(node1==null && node2==null){
-           return true;
-       }
-       if(node1.data===node2.data){
-           return (isSymmetry(node1.left , node2.right) && isSymmetry(node1.right , node2.left))
-       }
-       return false;
-   }
-   return isSymmetry(root.left , root.right);
+    function isSymmetry(node1, node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1.data === node2.data) {
+            return (isSymmetry(node1.left, node2.right) && isSymmetry(node1.right, node2.left))
+        }
+        return false;
+    }
+    return isSymmetry(root.left, root.right);
 
 }
 
 // const flag = checkBinaryTree(root);
-console.log('my tree is', root);
-const flag = checkSymmetry(root);
-console.log(flag);
+// console.log('my tree is', root);
+// const flag = checkSymmetry(root);
+// console.log(flag);
+
+
+
+	  
