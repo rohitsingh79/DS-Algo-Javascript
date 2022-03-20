@@ -7,11 +7,12 @@ class Node {
 
 let root;
 root = new Node(1);
-root.left = new Node(3);
-root.right = new Node(5);
-root.left.left = new Node(7);
-root.left.right = new Node(11);
-root.right.left = new Node(17);
+root.left = new Node(2);
+root.right = new Node(3);
+root.left.left = new Node(4);
+root.left.right = new Node(5);
+root.right.left = new Node(6);
+root.right.right = new Node(7);
 
 // console.log(root)
 
@@ -29,7 +30,6 @@ root.right.left = new Node(17);
 
 //**************************************************************************************************************/
 // level order traversal using queue data structure
-
 function levelOrderTraversal(root) {
     let q = [];
     let curr;
@@ -46,6 +46,7 @@ function levelOrderTraversal(root) {
     }
 }
 
+//**************************************************************************************************************/
 // console.log("level order traversal")
 // levelOrderTraversal(root)
 
@@ -62,6 +63,7 @@ function inOrderTraversal(root){
 // console.log('inorder traversal')
 // inOrderTraversal(root)
 
+//**************************************************************************************************************/
 // preorder traversal
 //node-->Left-->Right
 function preOrderTraversal(root){
@@ -158,7 +160,7 @@ function countLeafNodes(root){
 //**************************************************************************************************************/
 // recursive  method to find height of Binary Tree or max depth
 // max(Left,Right +1)
-function findHeightRecursuve(node){
+function findHeightRecursive(node){
     let height;
     let left;
     let right;
@@ -166,29 +168,30 @@ function findHeightRecursuve(node){
 if(node==null){
     return 0;
 }
-left = findHeightRecursuve(node.left);
-right = findHeightRecursuve(node.right);
+left = findHeightRecursive(node.left);
+right = findHeightRecursive(node.right);
 height = Math.max(left , right) + 1
 return height;
 }
 
-console.log(findHeightRecursuve(root))
+console.log(findHeightRecursive(root))
 //**************************************************************************************************************/
+
 // function to check if a binary tree is a binary search tree or not
-// function checkBinaryTree(root){
+function checkBinaryTree(root){
 
-//     function isBst(node , min , max){
-//         if(node==null){
-//             return true
-//         }
-//         if(node.data<min || node.data>max){
-//             return false;
-//         }
-//         return isBst(node.left , min , node.data) && isBst(node.right , node.data , max)
-//     }
-//     return isBst(root);
+    function isBst(node , min , max){
+        if(node==null){
+            return true
+        }
+        if(node.data<min || node.data>max){
+            return false;
+        }
+        return isBst(node.left , min , node.data) && isBst(node.right , node.data , max)
+    }
+    return isBst(root);
 
-// }
+}
 
 // const flag = checkBinaryTree(root);
 // console.log(flag);
@@ -217,4 +220,34 @@ function checkSymmetry(root) {
 
 
 
-	  
+//**************************************************************************************************************/
+// preorder traversal using iterative method
+// using stack 
+// O(n) - time complexity and O(n) - space complexity
+function preOrderIterative1(root){
+let stack = [];
+stack.push(root);
+let curr ;
+while(stack.length>0){
+    // pop the top most element
+
+    curr = stack[stack.length-1];
+    stack.pop();
+    console.log(curr.data)
+    if(curr.right){
+        stack.push(curr.right)
+    }
+    if(curr.left){
+        stack.push(curr.left)
+    }
+}
+}
+
+console.log(preOrderIterative1(root))
+
+// 2nd approach 
+// print all the left nodes and stack the right nodes
+// repeat the same process for all the right node
+function preOrderIterative2(root){
+
+}
