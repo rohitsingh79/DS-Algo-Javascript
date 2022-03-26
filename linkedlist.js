@@ -10,34 +10,34 @@
 //     }
 
 //function to reverse the linked list
-// function reverList(node){
-//     var next = null;
-//     var curr = node;
-//     var prev = null;
-//     while(curr!=null){
-//         next = curr.next;
-//         curr.next = prev;
-//         prev = curr;
-//         curr = next;
-//     }
-//     head1 = prev;
-// }    
+function reverList(node){
+    var next = null;
+    var curr = node;
+    var prev = null;
+    while(curr!=null){
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    head1 = prev;
+}    
 
-// class Node {
-//     constructor(value){
-//         this.data = value;
-//         this.next=null;
-//     }
-// }
+class Node {
+    constructor(value){
+        this.data = value;
+        this.next=null;
+    }
+}
 
 // // first linked list 
-// head1 = new Node(1);
-// let second1 = new Node(2);
-// let third1 = new Node(3);
-// let fourth1 = new Node(-4);
-// head1.next =  second1;
-// second1.next = third1;
-// third1.next = fourth1;
+head1 = new Node(1);
+let second1 = new Node(2);
+let third1 = new Node(3);
+let fourth1 = new Node(-4);
+head1.next =  second1;
+second1.next = third1;
+third1.next = fourth1;
 
 // // second linked list
 // head2 = new Node(1);
