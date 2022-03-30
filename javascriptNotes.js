@@ -1,4 +1,5 @@
 //Notes for javascript
+
 // arrow function takes the this keyword lexically
 //normal function takes the this keyword with which it is bind to
 
@@ -41,7 +42,7 @@
 
 // console.log(new person()) // error person is not a constrcutor
 
- //************************************************************************************************************
+//************************************************************************************************************
 
  // destructuring array and obj using esg javascript
 
@@ -135,17 +136,21 @@
 // console.log(Boolean('false')===Boolean(false))
 
 
-// Selecting elmennts from the dom
+//************************************************************************************************************
+
+/** Selecting elmennts from the dom  */ 
+
 // document.getElementById('section-1');
 // document.getElementsByClassName('class');
-// document.querySelector('.head');
+// document.querySelector('.head'); // this is used for class name
+//documnet.
 
-// capturing and bubbling phase
-// the click method goes from the top to the element that has been clicked in the capturing phase
-// and then in the bubbling phase it bubbles back to the the tops
 
-// if we attach the event listener to the child , the event is propogated to the parent div
+/** to be done write the difference between nodeList and html elements */
 
+
+
+//************************************************************************************************************
 // call , apply and bind method
 // var person = {
 //     name:'rohit',
@@ -172,44 +177,13 @@
 
 // funcCall('World')
 
-// interview question asked for delay
-// function showText(text){
-// return new Promise((resolve , reject) => {
-//     setTimeout(()=>{
-//         resolve(text);
-//     },1000)
-// })
-// }
-
-// Promise.all([showText('hello'), Promise.resolve('world')]).then((res)=>{
-//     console.log('response is ' , res);
-// })
-
-
-// temporal dead zone ,
-// where the variable let and const are present  in the scope , but they are still not declared
-
-
-// Array.isArray(['1','2','3'])
-
-// arguments applied to a function
-//function func1(a, b, c) {
-//console.log(...arguments);
-// expected output: 1
-
 
 //************************************************************************************************************
-// infinite currying
-function add(a){
-    console.log('add called ', a)
-return function(b){
-if(b){
-    return add(a+b);
-}
-else{
-    return a;
-}
-}
-}
 
-console.log(add(5)(6)(9)());
+/**find index in javascript */
+// const a = [{id:'tile34433'},{id:'tile'},{id:'Hero'}];
+// const index = a.findIndex((obj)=>{
+// return obj.id==='tile';
+// })
+
+// console.log(index);
