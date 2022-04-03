@@ -241,3 +241,84 @@ var obj1 = {
 // the prototype chain 
 //https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
 
+//************************************************************************************************************
+
+// define scope and scope chain in javascript
+
+
+
+//1.gloabal scope
+// var globalVariable = "Hello world";
+
+// function sendMessage(){
+//   return globalVariable; // can access globalVariable since it's written in global space
+// }
+
+// function sendMessage2(){
+//   return sendMessage(); // Can access sendMessage function since it's written in global space
+// }
+
+// sendMessage2();  // Returns “Hello world”
+
+//2.local or functional scope
+// function awesomeFunction(){
+//     var a = 2;
+  
+//     var multiplyBy2 = function(){
+//       console.log(a*2); // Can access variable "a" since a and multiplyBy2 both are written inside the same function
+//     }
+//   }
+//   console.log(a); // Throws reference error since a is written in local scope and cannot be accessed outside
+  
+//   multiplyBy2(); // Throws reference error since multiplyBy2 is written in local scope
+
+//3.block scope
+{
+    var x = 45;
+  }
+  
+  console.log(x); // Gives reference error since x cannot be accessed outside of the block
+  
+  for(let i=0; i<2; i++){
+    // do something
+  }
+  
+  console.log(i); // Gives reference error since i cannot be accessed outside of the for loop block
+
+
+  var y = 24;
+
+function favFunction(){
+  var x = 667;
+  var anotherFavFunction = function(){
+    console.log(x); // Does not find x inside anotherFavFunction, so looks for variable inside favFunction, outputs 667
+  }
+
+  var yetAnotherFavFunction = function(){
+    console.log(y); // Does not find y inside yetAnotherFavFunction, so looks for variable inside favFunction and does not find it, so looks for variable in global scope, finds it and outputs 24
+  }
+
+  anotherFavFunction();
+  yetAnotherFavFunction();
+}
+
+
+favFunction();
+//************************************************************************************************************
+// memoized function
+function memoizeAddTo256(){
+    var cache = {}
+    return function(num){
+        if(num in cache){
+            console.log('cached');
+            return cache[num]
+        }
+        else{
+            cache[num] = num+256;
+            return cache[num];
+        }
+    }
+}
+
+var memoizeAdd = memoizeAddTo256();
+memoizeAdd(20) // outpputs 
