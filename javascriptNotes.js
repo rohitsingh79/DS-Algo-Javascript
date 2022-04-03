@@ -1,3 +1,5 @@
+
+
 //Notes for javascript
 
 // arrow function takes the this keyword lexically
@@ -152,29 +154,29 @@
 
 //************************************************************************************************************
 // call , apply and bind method
-// var person = {
-//     name:'rohit',
-//     hello:function(thing){
-//         console.log(this.name + "says hello "+ thing)
-//     }
-// }
+var person = {
+    name:'rohit',
+    hello:function(thing){
+        console.log(this.name + " says hello "+ thing)
+    }
+}
 
-// var obj1 = {
-//     name:'Singh'
-// }
-// person.hello('World');
+var obj1 = {
+    name:'Kailash'
+}
 
-// call method
+//person.hello('World');
+
+//call method
 // person.hello.call(obj1, 'World')
 
 // apply method
 // just adding an array difference
-// person.hello.apply(obj1, ['Wolrd'])
+//person.hello.apply(obj1, ['Wolrd'])
 
 //bind method
-// it just returns a new function
+//it just returns a new function
 // var funcCall = person.hello.bind(obj1);
-
 // funcCall('World')
 
 
@@ -185,5 +187,57 @@
 // const index = a.findIndex((obj)=>{
 // return obj.id==='tile';
 // })
-
 // console.log(index);
+
+//************************************************************************************************************
+// event loop in practise
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+// Promise.resolve('Resolved promise 2').then(res => {
+//   for (let i = 0; i < 1000000000; i++) {}
+//   console.log(res);
+// });
+
+// console.log('Test end');
+
+// creating a delay function and promises
+//************************************************************************************************************
+// const delay = function (seconds){
+//     const promise = new Promise((resolve , reject)=>{
+//         setTimeout(()=>{
+//             resolve('resolved')
+//         },seconds*1000)
+//     })
+//     return promise
+// }
+
+// delay(1).then((res)=>{ console.log(res)})
+
+// Promise.all([delay(1),delay(2),delay(3)]).then((res)=>{
+//    for(let a of res){
+//        console.log(a);
+//    }
+// })
+
+// Promise.any([Promise.reject('hello'),Promise.reject('hello'),Promise.reject('hello')]).then((res)=>{
+//         console.log(res);
+//  })
+
+
+// async and await
+// await is eqaul to then in promise
+
+// const fetchProductDetailById = async () => {
+//     const response = await delay(1);
+//     console.log(response)
+//    return response;
+   
+//   };
+
+// fetchProductDetailById();
+
+// the prototype chain 
+//https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
+
