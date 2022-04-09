@@ -45,10 +45,11 @@ function levelOrderTraversal(root) {
         }
     }
 }
-
-//**************************************************************************************************************/
 // console.log("level order traversal")
 // levelOrderTraversal(root)
+
+//**************************************************************************************************************/
+
 
 // inorder traversal
 //Left-->node-->Right
@@ -76,6 +77,32 @@ function preOrderTraversal(root){
 }
 // console.log('pre order traversal')
 // preOrderTraversal(root)
+
+//**************************************************************************************************************/
+// preorder traversal using iterative method
+// using stack 
+// O(n) - time complexity and O(n) - space complexity
+function preOrderIterative1(root){
+    let stack = [];
+    stack.push(root);
+    let curr ;
+    while(stack.length>0){
+        // pop the top most element
+    
+        curr = stack[stack.length-1];
+        stack.pop();
+        console.log(curr.data)
+        if(curr.right){
+            stack.push(curr.right)
+        }
+        if(curr.left){
+            stack.push(curr.left)
+        }
+    }
+    }
+    
+    console.log(preOrderIterative1(root))
+//**************************************************************************************************************/
 
 //post Order traversal
 //Left-->Right-->Node
@@ -118,40 +145,40 @@ function countLeafNodes(root){
 
 //**************************************************************************************************************/
 // // Iterative method to find height of Binary Tree or max depth
-// function findHeightIteravtive(node){
-// if(node==null){
-//     return -1;
-// }
+function findHeightIteravtive(node){
+if(node==null){
+    return -1;
+}
 
-// //create an empty queue
-// let q = [];
-// let curr;
-// //initial height;
-// var height = 0;
-// //push the root to the queue
-// q.push(node);
-// // console.log('pushed into the queue', q);
-// while(q.length>0){
+//create an empty queue
+let q = [];
+let curr;
+//initial height;
+var height = 0;
+//push the root to the queue
+q.push(node);
+// console.log('pushed into the queue', q);
+while(q.length>0){
 
-//     let size = q.length;
-//     console.log('queue length', size);
-//     height = height+1;
-//     while(size>0){
-//         //pop from the front
-//         curr = q.shift();
-//         size--;
-//         if(curr.left!=null){
-//             q.push(curr.left);
-//         }
-//         if(curr.right!=null){
-//             q.push(curr.right)
-//         }
+    let size = q.length;
+    console.log('queue length', size);
+    height = height+1;
+    while(size>0){
+        //pop from the front
+        curr = q.shift();
+        size--;
+        if(curr.left!=null){
+            q.push(curr.left);
+        }
+        if(curr.right!=null){
+            q.push(curr.right)
+        }
 
-//     }
-// }
-// return height;
+    }
+}
+return height;
 
-// }
+}
 
 // const height = findHeightIteravtive(root)
 // console.log(height);
@@ -174,7 +201,7 @@ height = Math.max(left , right) + 1
 return height;
 }
 
-console.log(findHeightRecursive(root))
+// console.log(findHeightRecursive(root))
 //**************************************************************************************************************/
 
 // function to check if a binary tree is a binary search tree or not
@@ -220,30 +247,7 @@ function checkSymmetry(root) {
 
 
 
-//**************************************************************************************************************/
-// preorder traversal using iterative method
-// using stack 
-// O(n) - time complexity and O(n) - space complexity
-function preOrderIterative1(root){
-let stack = [];
-stack.push(root);
-let curr ;
-while(stack.length>0){
-    // pop the top most element
 
-    curr = stack[stack.length-1];
-    stack.pop();
-    console.log(curr.data)
-    if(curr.right){
-        stack.push(curr.right)
-    }
-    if(curr.left){
-        stack.push(curr.left)
-    }
-}
-}
-
-console.log(preOrderIterative1(root))
 
 // 2nd approach 
 // print all the left nodes and stack the right nodes

@@ -283,7 +283,7 @@ var obj1 = {
     // do something
   }
   
-  console.log(i); // Gives reference error since i cannot be accessed outside of the for loop block
+   // Gives reference error since i cannot be accessed outside of the for loop block
 
 
   var y = 24;
@@ -322,3 +322,22 @@ function memoizeAddTo256(){
 
 var memoizeAdd = memoizeAddTo256();
 memoizeAdd(20) // outpputs 
+
+console.log(9 - '1');
+
+
+// hoisting does not work for named functions
+// console.log(Func) // it will throw you refernce error
+// const Func = function(){
+
+//}
+ 
+function getName() {
+  return 'Inside getName()';
+}
+
+const getName = function() {
+  return 'Inside const getName()';
+}
+
+getName();
