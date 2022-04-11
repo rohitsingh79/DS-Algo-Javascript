@@ -6,16 +6,18 @@ class Node {
 }
 
 let root;
-root = new Node(1);
-root.left = new Node(2);
-root.right = new Node(3);
-root.left.left = new Node(4);
-root.left.right = new Node(5);
-root.right.left = new Node(6);
-root.right.right = new Node(7);
+// root = new Node(1);
+// root.left = new Node(2);
+// root.right = new Node(3);
+// root.left.left = new Node(4);
+// root.left.right = new Node(5);
+// root.right.left = new Node(6);
+// root.right.right = new Node(7);
 
 // console.log(root)
 
+//**************************************************************************************************************/
+// for symmtery tree 1
 // let secondLeft;
 // let secondRight;
 // root = new Node(1);
@@ -27,6 +29,17 @@ root.right.right = new Node(7);
 // secondLeft.right = new Node(4);
 // secondRight.left = new Node(4);
 // secondRight.right = new Node(3);
+
+// for symmetry tree 2
+let secondLeft;
+let secondRight;
+root = new Node(1);
+secondLeft = new Node(2);
+secondRight = new Node(2);
+root.left = secondLeft;
+root.right = secondRight;
+secondLeft.right = new Node(3);
+secondRight.right = new Node(3);
 
 //**************************************************************************************************************/
 // level order traversal using queue data structure
@@ -101,7 +114,7 @@ function preOrderIterative1(root){
     }
     }
     
-    console.log(preOrderIterative1(root))
+    // console.log(preOrderIterative1(root))
 //**************************************************************************************************************/
 
 //post Order traversal
@@ -231,10 +244,15 @@ function checkSymmetry(root) {
         if (node1 == null && node2 == null) {
             return true;
         }
-        if (node1.data === node2.data) {
-            return (isSymmetry(node1.left, node2.right) && isSymmetry(node1.right, node2.left))
+        if (node1 == null && node2 || node1 && node2==null ) {
+            return false;
         }
-        return false;
+        if (node1.data !== node2.data) {
+            return false;
+           
+        }
+        console.log(node1.data , node2.data);
+        return (isSymmetry(node1.left, node2.right) && isSymmetry(node1.right, node2.left));
     }
     return isSymmetry(root.left, root.right);
 
@@ -242,8 +260,8 @@ function checkSymmetry(root) {
 
 // const flag = checkBinaryTree(root);
 // console.log('my tree is', root);
-// const flag = checkSymmetry(root);
-// console.log(flag);
+const flag = checkSymmetry(root);
+console.log(flag);
 
 
 
