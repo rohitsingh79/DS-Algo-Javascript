@@ -1,66 +1,97 @@
+//Dynamic programing
+// fibonacci series with memoization
+// counting the steps
+// 0 ,1 ,1 ,2, 3, ,5,8
 
-// A Simple Merge based O(n) solution to find median of
-// two sorted arrays
+let dpArray = new Array(7).fill(-1)
 
-/* This function returns median of ar1[] and ar2[].
-Assumptions in this function:
-Both ar1[] and ar2[] are sorted arrays
-Both have n elements */
-function getMedian(ar1, ar2, n)
-{
-	var i = 0; /* Current index of i/p array ar1[] */
-	var j = 0; /* Current index of i/p array ar2[] */
-	var count;
-	var m1 = -1, m2 = -1;
-
-	/* Since there are 2n elements, median will be average
-	of elements at index n-1 and n in the array obtained after
-	merging ar1 and ar2 */
-	for (count = 0; count <= n; count++)
-	{
-		/*Below is to handle case where all elements of ar1[] are
-		smaller than smallest(or first) element of ar2[]*/
-		if (i == n)
-		{
-			m1 = m2;
-			m2 = ar2[0];
-			break;
-		}
-
-		/*Below is to handle case where all elements of ar2[] are
-		smaller than smallest(or first) element of ar1[]*/
-		else if (j == n)
-		{
-			m1 = m2;
-			m2 = ar1[0];
-			break;
-		}
-		/* equals sign because if two
-			arrays have some common elements */
-		if (ar1[i] <= ar2[j])
-		{
-			m1 = m2; /* Store the prev median */
-			m2 = ar1[i];
-			i++;
-		}
-		else
-		{
-			m1 = m2; /* Store the prev median */
-			m2 = ar2[j];
-			j++;
-		}
+function fib(num){
+	if(num<=1){
+		return dpArray[num] = 1
 	}
 
-	return (m1 + m2)/2;
+	if(dpArray[num]!=-1){
+		return dpArray[num];
+	}
+
+	dpArray[num] = fib(num-2)+fib(num-1);
+	return dpArray[num];
 }
 
-/* Driver program to test above function */
-var ar1 = [1, 12, 15, 26, 38];
-var ar2 = [2, 13, 17, 30, 45];
-var n1 = ar1.length;
-var n2 = ar2.length;
-if (n1 == n2)
-	console.log("Median is "+ getMedian(ar1, ar2, n1));
-else
-	console.log("Doesn't work for arrays of unequal size");
+// console.log(fib(6));
+
+// Best time to buy the stocks
+
+var maxProfit = function(prices) {
+    
+    let left = 0;
+    let right = left+1;
+    let max = 0;
+    let profit = 0;
+    
+    while(right<prices.length){
+        // check for the condition
+        if(prices[left]<prices[right]){
+			// console.log(prices[left] , prices[right])
+            profit = prices[right]-prices[left];
+           if(profit>max){
+			   max = profit;
+		   }	
+        }
+        else{
+            left = right
+        }
+        right+=1;
+    }
+    return max
+    
+};
+
+// console.log(maxProfit([7,1,5,3,6,4]));
+
+// Kandane's Algorithm
+// maximum subarray
+nums = [5,4,-1,7,8]
+function maxSubArray(arr){
+
+	var maxint = Math.pow(2, 53)
+    var max = -maxint - 1
+	let maxArr = 0;
+	for(let i = 0;i<arr.length;i++){
+		maxArr = maxArr+arr[i];
+		console.log(maxArr);
+		if(maxArr>max){
+			max = maxArr;
+			console.log(max)
+		}
+		if(maxArr<=-1){
+			maxArr = 0;
+		}
+	}
+	return max;
+
+}
+
+// console.log(maxSubArray([-1,0]));
+
+// maximum loot case with alternate house
+let hval = [1,2,3,1];
+function loot(hval){
+	let picked = 0;
+	let sum1 = 0;
+	let sum2 = 0;
+	let nonPicked =1;
+	for(let i=picked ; i<hval.length;i+=2){
+		sum1  = sum1+hval[i];
+	}
+	for(let i=nonPicked ; i<hval.length;i+=2){
+		sum2  = sum2+hval[i];
+	}
+
+	return Math.max(sum1 , sum2)
+
+}
+console.log(loot(hval));
+
+
 
