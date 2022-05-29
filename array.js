@@ -51,7 +51,7 @@ var maxProfit = function(prices) {
 
 // Kandane's Algorithm
 // maximum subarray
-nums = [5,4,-1,7,8]
+// nums = [5,4,-1,7,8]
 function maxSubArray(arr){
 
 	var maxint = Math.pow(2, 53)
@@ -91,7 +91,93 @@ function loot(hval){
 	return Math.max(sum1 , sum2)
 
 }
-console.log(loot(hval));
+// console.log(loot(hval));
 
 
+// find the min and max of an arrray 
+let nums = [8,3,1,2,5,4];
 
+
+class Pair{
+	constructor(){
+		this.min = -1;
+		this.max = 100000;
+	}
+}
+
+function MaxMinArray(nums , low, high){
+	let minmax = new Pair();
+	let mleft = new Pair();
+	let mRight = new Pair();
+
+	if(low===high){
+		minmax.min = nums[low];
+		minmax.max = nums[high];
+		return minmax
+	}
+	if(high===low+1){
+		if(nums[low]>nums[high]){
+			minmax.max = nums[low];
+			minmax.min = nums[high]
+		}
+		else{
+			minmax.max = nums[high];
+			minmax.min = nums[low]
+		}
+		return minmax; 	
+
+	}
+	// calculate the mid if nums is greater than 0
+	let mid =  parseInt((low + high) / 2);
+	console.log('mid value ' , mid)
+
+	mleft = MaxMinArray(nums,low,mid);
+	mRight = MaxMinArray(nums , mid+1,high)
+	console.log('mleft',mleft);
+	console.log('mRight',mRight);
+
+	if(mleft.min>mRight.min){
+		minmax.min = mRight.min
+	}
+	else{
+		minmax.min = mleft.min;
+	}
+	if(mleft.max>mRight.max){
+		minmax.max = mleft.max
+	}
+	else{
+		minmax.max = mRight.max
+	}
+	return minmax;
+}
+
+// console.log(MaxMinArray([8,3,1] , 0, 2))
+
+
+// recurrive approach to reverse the stack;
+let arr = ['1','2','3','4'];
+function reverse(arr){
+	if(arr.length==0){
+		return;
+	}
+	let temp = arr[arr.length-1];
+	arr.pop();
+	reverse(arr);
+	insertAtBottom(arr,temp);
+}
+
+function insertAtBottom(arr , temp){
+	if(arr.length===0){
+		arr.push(temp);
+		return;
+	}
+	// pop all the elements
+	let x = arr[arr.length-1];
+	arr.pop();
+	insertAtBottom(arr,temp);
+	arr.push(x);
+}
+
+console.log(arr);
+reverse(arr);
+console.log(arr);
