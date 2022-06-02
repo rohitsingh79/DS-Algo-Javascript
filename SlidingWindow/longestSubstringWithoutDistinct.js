@@ -38,3 +38,10 @@ var lengthOfLongestSubstring = function(s) {
 };
 
 lengthOfLongestSubstring('abcabcbb')
+
+// let words = ["foo","bar"];
+// let wordLength = words[0].length
+// let wordCount = words.length
+
+// console.log(wordLength);
+// console.log(wordCount);
