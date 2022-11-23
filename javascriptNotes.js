@@ -165,20 +165,21 @@ var obj1 = {
     name:'Kailash'
 }
 
-//person.hello('World');
+//normal call
+person.hello('World');
 
-//call method
-// person.hello.call(obj1, 'World')
+// call method
+person.hello.call(obj1, 'World')
 
 // apply method
 // just adding an array difference
-//person.hello.apply(obj1, ['Wolrd'])
+person.hello.apply(obj1, ['Wolrd'])
 
-//bind method
-//it just returns a new function
-// var funcCall = person.hello.bind(obj1);
-// funcCall('World')
-
+// bind method
+// it just returns a new function
+var funcCall = person.hello.bind(obj1);
+funcCall('World')
+// 
 
 //************************************************************************************************************
 
@@ -191,52 +192,71 @@ var obj1 = {
 
 //************************************************************************************************************
 // event loop in practise
-// console.log('Test start');
-// setTimeout(() => console.log('0 sec timer'), 0);
-// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// priority is given to micro task queue in javascript and after that se time out
+// op 
+//Test start
+// Test end
+// Resolved promise 1
+// Resolved promise 2
+// 0 sec timer
 
-// Promise.resolve('Resolved promise 2').then(res => {
-//   for (let i = 0; i < 1000000000; i++) {}
-//   console.log(res);
-// });
 
-// console.log('Test end');
+console.log('Test start');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then(res => {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log(res);
+});
+
+console.log('Test end');
 
 // creating a delay function and promises
 //************************************************************************************************************
-// const delay = function (seconds){
-//     const promise = new Promise((resolve , reject)=>{
-//         setTimeout(()=>{
-//             resolve('resolved')
-//         },seconds*1000)
-//     })
-//     return promise
-// }
 
-// delay(1).then((res)=>{ console.log(res)})
+//The Promise object represents the eventual completion (or failure) of an asynchronous 
+//operation and its resulting value.
+const delay = function (seconds){
+    const promise = new Promise((resolve , reject)=>{
+        setTimeout(()=>{
+            resolve('resolved')
+        },seconds*1000)
+    })
+    return promise
+}
 
-// Promise.all([delay(1),delay(2),delay(3)]).then((res)=>{
-//    for(let a of res){
-//        console.log(a);
-//    }
-// })
+delay(1).then((res)=>{ console.log(res)})
 
-// Promise.any([Promise.reject('hello'),Promise.reject('hello'),Promise.reject('hello')]).then((res)=>{
-//         console.log(res);
-//  })
+Promise.all([delay(1),delay(2),delay(3)]).then((res)=>{
+   for(let a of res){
+       console.log(a);
+   }
+})
+
+Promise.any([Promise.reject('hello'),Promise.reject('hello'),Promise.reject('hello')]).then((res)=>{
+        console.log(res);
+ })
 
 
 // async and await
 // await is eqaul to then in promise
+//Async/Await is used to work with promises in asynchronous functions. 
+//It is basically syntactic sugar for promises. It is just a wrapper to restyle code
+// and make promises easier to read and use. It makes asynchronous code look more like 
+//synchronous/procedural code, which is easier to understand.
 
-// const fetchProductDetailById = async () => {
-//     const response = await delay(1);
-//     console.log(response)
-//    return response;
+//differences between promises and async and await
+//https://www.geeksforgeeks.org/difference-between-promise-and-async-await-in-node-js/#:~:text=Async%2FAwait%20is%20used%20to,which%20is%20easier%20to%20understand.
+
+const fetchProductDetailById = async () => {
+    const response = await delay(1);
+    console.log(response)
+   return response;
    
-//   };
+  };
 
-// fetchProductDetailById();
+fetchProductDetailById();
 
 // the prototype chain 
 //https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
@@ -327,10 +347,10 @@ console.log(9 - '1');
 
 
 // hoisting does not work for named functions
-// console.log(Func) // it will throw you refernce error
-// const Func = function(){
+console.log(Func) // it will throw you refernce error
+const Func = function(){
 
-//}
+}
  
 function getName() {
   return 'Inside getName()';
