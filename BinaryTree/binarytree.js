@@ -1,3 +1,9 @@
+//https://www.geeksforgeeks.org/introduction-to-binary-tree/
+//https://www.geeksforgeeks.org/iterative-postorder-traversal/
+
+
+
+
 class Node {
     constructor(item) {
         this.data = item;
@@ -77,6 +83,28 @@ function inOrderTraversal(root){
 // console.log('inorder traversal')
 // inOrderTraversal(root)
 
+
+// iterative  inorder
+function iterativeInOrder(root) {
+    // left --> root--> node
+    let st = [];
+    while (root !== null || st.length) {
+        if (root) {
+            // move to the left
+            st.push(root);
+            root = root.left;
+        }
+        else {
+            // pop the element from the stack
+            root = st.pop();
+            console.log(' node-->data ', root.data);
+            root = root.right;
+
+        }
+
+    }
+}
+
 //**************************************************************************************************************/
 // preorder traversal
 //node-->Left-->Right
@@ -90,6 +118,30 @@ function preOrderTraversal(root){
 }
 // console.log('pre order traversal')
 // preOrderTraversal(root)
+
+// iterative preorder traversal
+function iterativePrePorder(root){
+
+    let st = [];
+
+    while(root!==null || st.length){
+
+        if(root){
+
+            console.log('node-->data' , root.data);
+            st.push(root);
+            root = root.left;
+        }
+
+        else {
+
+           // pop the node
+           root = st.pop();
+           root = root.right;
+        }
+
+    }
+}
 
 //**************************************************************************************************************/
 // preorder traversal using iterative method
@@ -264,12 +316,269 @@ const flag = checkSymmetry(root);
 console.log(flag);
 
 
+//****************************************************************************************************************** */
+// Binary Tree: Implement a class with insert, delete, find, and various traversals (inorder, postorder, preorder, left view, right view, top view, bottom view, BFS).
+class Node {
+
+    constructor(val) {
+
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function insert(root, data) {
+
+    if (!root) {
+
+        return new Node(data);
+    }
+
+    // bfs push the root to q
+
+    let q = [];
+
+    q.push(root);
+
+    while (q.length) {
+
+        const node = q.shift();
+
+        if (node.left == null) {
+            node.left = new Node(data);
+            break;
+        }
+
+        else q.push(node.left)
+
+        if (node.right == null) {
+
+            node.right = new Node(data);
+            break;
+        }
+        else q.push(node.right);
+    }
+
+    return root;
 
 
+}
 
-// 2nd approach 
-// print all the left nodes and stack the right nodes
-// repeat the same process for all the right node
-function preOrderIterative2(root){
+let root = null;
+root = insert(root, 10)
+root = insert(root, 20)
+root = insert(root, 30)
+root = insert(root, 40)
+root = insert(root, 50)
+root = insert(root, 60)
+root = insert(root, 70)
+console.log('root', root)
+
+
+//******************************************************************************************************************** */
+
+// Binary Tree: Implement a class with insert, delete, find, and various traversals (inorder, postorder, preorder, left view, right view, top view, bottom view, BFS).
+
+//1 . insert
+//2 . traversal - recursive(pre order , post order)
+//3 . traversal - iterative(pre order , post order)
+//4 . construct binary tree from pre order and inorder traversal
+//5 . deletion
+class Node {
+
+    constructor(val) {
+
+        this.data = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function insert(root, data) {
+
+    if (!root) {
+
+        return new Node(data);
+    }
+
+    // bfs push the root to q
+
+    let q = [];
+
+    q.push(root);
+
+    while (q.length) {
+
+        const node = q.shift();
+
+        if (node.left == null) {
+            node.left = new Node(data);
+            break;
+        }
+
+        else q.push(node.left)
+
+        if (node.right == null) {
+
+            node.right = new Node(data);
+            break;
+        }
+        else q.push(node.right);
+    }
+
+    return root;
+
+
+}
+
+let root = null;
+root = insert(root, 10)
+root = insert(root, 20)
+root = insert(root, 30)
+root = insert(root, 40)
+root = insert(root, 50)
+root = insert(root, 60)
+root = insert(root, 70)
+console.log('root', root)
+
+function recursivepPostOrderTraversal(root) {
+    if (root == null) return
+    console.log(root.data);
+    preOrderTraversal(root.left);
+    preOrderTraversal(root.right)
+}
+
+function recursiveInOrderTraversal(root) {
+    if (!root) return;
+    inOrderTraversal(root.left);
+    console.log(root.data);
+    inOrderTraversal(root.right)
+
+}
+
+function recursivePostorder(root) {
+    if (!root) return;
+    postorder(root.left);
+    postorder(root.right);
+    console.log(root.data);
+
+    // 40 50 20 60 70 30 10
+}
+
+function iterativeInOrder(root) {
+    // left --> root--> node
+    let st = [];
+    while (root !== null || st.length) {
+        if (root) {
+            // move to the left
+            st.push(root);
+            root = root.left;
+        }
+        else {
+            // pop the element from the stack
+            root = st.pop();
+            console.log(' node-->data ', root.data);
+            root = root.right;
+
+        }
+
+    }
+}
+
+function iterativePrePorder(root) {
+    let st = [];
+
+    while (root !== null || st.length) {
+
+        if (root) {
+
+            console.log('node-->data', root.data);
+            st.push(root);
+            root = root.left;
+        }
+
+        else {
+
+            // pop the node
+            root = st.pop();
+            root = root.right;
+        }
+
+    }
+}
+
+function createBinaryTree() {
+//https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/submissions/1341471422/
+// TC-->O(n^2) since we are traversing through the preorder once and make it root and for 
+// each element we are searching for it in the inorder which takes n time (n*n) 
+// let preorder = [3 , 9 , 20 , 15 ,7];
+// let inorder = [9 , 3 , 15 , 20 , 7];
+
+    let indexUnique = 0;
+    function search(val) {
+        return inorder.findIndex((entry) => entry === val)
+    }
+    function constructBinarytree(start, end) {
+        // recursive function 
+        // create a base case
+        if (end < start) return null;
+
+        let rootIndexVal = preorder[indexUnique];
+
+        let rootNode = new Node(rootIndexVal);
+
+        let indexInInorder = search(rootIndexVal);
+
+        indexUnique++;
+
+        rootNode.left = constructBinarytree(start, indexInInorder - 1);
+        rootNode.right = constructBinarytree(indexInInorder + 1, end);
+
+        return rootNode;
+
+    }
+    let finalTree = constructBinarytree(0, preorder.length - 1);
+    console.log('finalTree', finalTree)
+
+}
+
+function iterativePostOrderUsingTwoStack(root){
+//https://www.geeksforgeeks.org/iterative-postorder-traversal/
+// 1st iteration = [1]  , 2nd stack =  []
+// 2nd itr = [2 , 3]      2nd stack = [1]
+// 3rd itr = [2 , 6 , 7]  2nd stack = [1 , 3] 
+// 4th itr = [2 , 6]      2nd stack = [1 , 3 , 7]
+// 5th it = [2]           2nd stack = [1 , 3 , 7 , 6]
+//6th itr = [4 , 5]       2nd stack = [1 , 3 , 7 , 6 , 2]
+// 7th itr = [4]          2nd stack = [ 1, 3 , 7 , 6 , 2 , 5]
+//8th itr = []            2nd stack = [1 , 3 , 7 ,6 ,2 , 5 , 4]
+
+let st1 = [];
+let st2 = [];
+
+st1.push(root);
+
+while(st1.length){
+
+    let temp = st1[st1.length-1];
+    st1.pop();
+    st2.push(temp);
+    if(temp.left) st1.push(temp.left);
+    if(temp.right) st1.push(temp.right);
+
+}
+// console.log('postorder traversal' , st2);
+
+while(st2.length){
+    let temp = st2[st2.length-1];
+    console.log('data-->' , temp.data);
+    st2.pop();
+}
+
+}
+
+function deleteDeepest(root){
+    //https://www.geeksforgeeks.org/deletion-binary-tree/
 
 }

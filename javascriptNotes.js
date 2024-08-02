@@ -346,7 +346,7 @@ memoizeAdd(20) // outpputs
 console.log(9 - '1');
 
 
-// hoisting does not work for named functions
+// hoisting does not work for named functions depends whether you have declared using const ot let
 console.log(Func) // it will throw you refernce error
 const Func = function(){
 
@@ -361,3 +361,208 @@ const getName = function() {
 }
 
 getName();
+
+
+
+//********************************************************************************************************* */
+
+const arr = ["Banana" , "Orange" , "Banana"];  // arr
+const obj = { name: 'Rohit' , sirname:'Singh'}; // obj
+const set = new Set(arr); // set
+
+for(const s of set){ 
+    console.log('for loop')  // of can be used for arr or set
+    console.log('s' ,s)
+}
+
+for(const key in arr){  // in can be used for both arr and obj
+    console.log('key' , key)
+}
+
+
+//********************************************************************************************************* */
+
+//https://www.w3schools.com/js/js_array_methods.asp - Javscript methods
+
+//******************************************************************************************************** */
+
+// Concepts: Object.entries()
+
+// Conepts : iterating over the arrays and object
+// const obj = { a: '123' , b:'234' , c: '567'};
+// const arr = ['123' , '224' , '456'];
+
+// for(const key in obj){
+
+//     console.log('key' , key);
+// }
+
+// for(const key in arr){
+
+//     console.log('key' , key)
+// }
+
+
+// concepts: null and undefined
+//  console.log(null == undefined); // Output: true
+// console.log(null === undefined); // Output: false
+
+// Concept: configurable and no configurable property of an object 
+
+// Concept: Object.entries
+
+// const obj = {
+//     name:'Person',
+//     age:'25',
+//     occupation:'software'
+// }
+
+// console.log(Object.entries(obj));
+// [ [ 'name', 'Person' ], [ 'age', '25' ], [ 'occupation', 'software' ] ]
+
+// Concept:Object.freeze()
+
+// Concept: object.create()
+
+// Concept: Object.assign()
+
+// Concept: Object.defineProperty()
+
+
+
+
+
+
+// Problem solving question:
+// const a = [{id:1 , name:'Rohit' , marks:122} , {id:1 , name:'Rohit' , marks:223} , {id:5 , name:'Singh' , marks:456} , {id:2 , name:'BK' , marks:456}]
+
+// Do a deep clone of the object//deep clone 
+// function deepClone(obj) {
+//     if (typeof obj !== 'object' || obj === null) {
+//         return obj;
+//     }
+
+//     const clone = Array.isArray(obj) ? [] : {};
+//     for (const key in obj) {
+//         clone[key] = deepClone(obj[key]);
+//     }
+
+//     return clone;
+// }
+
+
+// Currying in javascript:
+
+// function add(a , b){
+
+//     return a+b;
+
+// }
+
+
+// // iterative solution
+
+// function curry(cb){
+
+//     let nofArgs = [];
+
+//     return function curried (param){
+
+//         nofArgs = [...nofArgs , param]
+
+//         if(nofArgs.length==cb.length) {
+            
+//             return cb(...nofArgs)
+        
+//         } // spread the params to the add function
+
+//         else return function(args){
+
+//             return curried(args)
+//         };
+
+//     }
+
+// }
+
+// // recursive solution
+
+// function curry(cb){
+
+//     return function curried(...args){  // args will be an array
+
+//         if(args.length==cb.length) {
+
+//             return cb(...args)
+//         }
+
+//         else return function (...newArgs){  // take the new arg as array
+
+//             return curried(...args , ...newArgs) // spread the new args and the old args 
+//         }
+
+
+//     }
+
+// }
+
+
+
+
+// const cSum = curry(add)
+// console.log(cSum(1)(2));
+
+
+// // flatten the array
+// let res = []
+
+// function flatten(arr){
+
+//    // base case when index reachees the end
+
+//    if(arr== null | undefined ) return;
+
+//     for(let i =0; i<arr.length; i++){
+
+//         if(!Array.isArray(arr[i])) res.push(arr[i]);
+
+//         else {
+
+//             // recursively call the flattern array
+
+//             flatten(arr[i]);
+
+//         }
+//     }
+// }
+
+// flatten(arrVal)
+
+
+// Remove duplicate and create an array from set
+// const arr = [5 , 5 , 5 ,5 ,4 , 3 , 2 , 1];
+
+// const set = new Set(arr);
+
+// console.log('ans' , set);
+// console.log('arr' , Array.from(set))
+
+// // problem solving remove the duplicate from array of objects with the same idconst arr3 = [...arr1, ...arr2]
+
+// const arr4 = arr3.find((itm) => itm.id === 1)
+
+// arr3.sort((itm1, itm2) => itm1.id - itm2.id)
+
+// let n = arr3.length;
+
+// let arrRes = [];
+
+// let i = 0;
+
+// while (i < n) {
+//     while (i + 1 < n && arr3[i].id === arr3[i + 1].id) i++;
+//     arrRes.push(arr3[i])
+//     i++;
+
+// }
+
