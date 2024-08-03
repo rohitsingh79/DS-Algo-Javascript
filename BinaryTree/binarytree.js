@@ -581,4 +581,182 @@ while(st2.length){
 function deleteDeepest(root){
     //https://www.geeksforgeeks.org/deletion-binary-tree/
 
+    function deleteDeepestNodeLeaf(root , rightMostNode){
+
+        let q = [];
+        q.push(root);
+
+        let temp = null;
+
+        while(q.length){
+
+            temp = q.shift();
+            if(temp==rightMostNode){ temp = null; return } // make null incase of root node
+
+            if(temp.left!==null){
+                if(temp.left===rightMostNode){
+                    temp.left = null
+                    return;
+                }
+                else q.push(temp.left);
+
+            }
+
+            if(temp.right!==null){
+
+                if(temp.right===rightMostNode){
+
+                    temp.right = null;
+                    return;
+                }
+
+                else q.push(temp.right);
+            }
+           
+        }
+    }
+
+    function deleteNode(val){
+
+        let node = root;
+
+        if(node.data === val) node = null;
+
+        // use level order traversal iterative using  queue to find the nodes
+
+        let q = [node];
+
+        let nodeToBeDeleted = null;
+
+        let temp;
+
+        while(q.length){
+
+             temp  = q.shift();
+
+            if(temp.data === val){
+                nodeToBeDeleted = temp; // this is the node to be deleted
+            }
+
+            // add the left of the tree to the queue
+
+            if(temp.left) q.push(temp.left);
+            if(temp.right) q.push(temp.right);
+        }
+
+        // if you find the node to be deleted then assign  it the right most node
+
+        if(nodeToBeDeleted){
+            nodeToBeDeleted.data = temp.data;
+            // delete the deepest node
+            // we can make the temp null here also but it will not do
+            // we need to iterate through the tree and make the parent of this right most node to null
+            // since the parent holds the address of the right most node
+            deleteDeepestNodeLeaf(root , temp)
+        }
+
+
+    }
+
+    deleteNode(12);
+
+    console.log('final ans' , root)
+}
+
+function find(root , val){
+  //https://www.geeksforgeeks.org/search-a-node-in-binary-tree/
+  //TC O(n) --> traverse n nodes
+  //Auxiliary spcae complexity O(n): we need to stack for each node which is n
+
+    if(root.val) return true;
+
+    if(!root) return false;
+
+    let res1 = find(root.left , val);
+
+    if(res1) return true;
+
+    let res2 = find(root.right , val);
+
+    return res2;
+
+}
+
+function leftView(){
+    //https://www.geeksforgeeks.org/print-left-view-binary-tree/
+    // left most node at each level
+
+    let maxLevel = 0;
+    let ans = [];
+    function helper(root , level){
+        if(root==null) return;
+        if(maxLevel<level){ ans.push(root.data);  maxLevel = level}// which means we need to print the node
+        helper(root.left , level+1);
+        helper(root.right , level+1)
+    }
+
+    helper(root , 1);
+    console.log('ans' ,ans)
+
+    //T.C--> O(N)
+    //SC-->O(N)
+    function itrHelper(){
+        if(!root) return;
+        let itrRes = [];
+        let q = [];
+        q.push(root);
+        while(q.length){
+            let n = q.length
+            for(let i = 0; i<n; i++){
+                let top = q.shift();
+                if(i==0) itrRes.push(top.data);
+                if(top.left) q.push(top.left);
+                if(top.right) q.push(top.right)
+            }
+            
+        }
+
+        console.log('itrRes' , itrRes)
+
+    }
+
+    itrHelper();
+}
+
+function rightView(){
+    //https://www.geeksforgeeks.org/print-right-view-binary-tree-2/
+
+    let ans = [];
+    let maxLevel = 0;
+    function rightViewRecursive(root , level){
+        // base case
+        if(!root) return;
+        if(maxLevel<level){ans.push(root.data); maxLevel = level}
+        rightViewRecursive(root.right , level+1);
+        rightViewRecursive(root.left , level+1)
+    }
+    rightViewRecursive(root , 1);
+    console.log('ans' , ans);
+
+    function rightRecursiveItr(){
+
+        if(!root) return null;
+
+        let ansItr = [];
+        let q = []
+        q.push(root);
+
+        while(q.length){
+            let  n = q.length;
+            for(let i = 0; i<n ;i++){
+                let top = q.shift();
+                if(i==n-1) ansItr.push(top.data);
+                if(top.left) q.push(top.left);
+                if(top.right) q.push(top.right);
+            }
+        }
+
+        console.log('ansItr' , ansItr)
+    }
+    rightRecursiveItr();
 }
