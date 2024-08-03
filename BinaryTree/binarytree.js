@@ -442,25 +442,25 @@ root = insert(root, 60)
 root = insert(root, 70)
 console.log('root', root)
 
-function recursivepPostOrderTraversal(root) {
+function recursivepPreOrderTraversal(root) {
     if (root == null) return
     console.log(root.data);
-    preOrderTraversal(root.left);
-    preOrderTraversal(root.right)
+    recursivepPreOrderTraversal(root.left);
+    recursivepPreOrderTraversal(root.right)
 }
 
 function recursiveInOrderTraversal(root) {
     if (!root) return;
-    inOrderTraversal(root.left);
+    recursiveInOrderTraversal(root.left);
     console.log(root.data);
-    inOrderTraversal(root.right)
+    recursiveInOrderTraversal(root.right)
 
 }
 
 function recursivePostorder(root) {
     if (!root) return;
-    postorder(root.left);
-    postorder(root.right);
+    recursivePostorder(root.left);
+    recursivePostorder(root.right);
     console.log(root.data);
 
     // 40 50 20 60 70 30 10
@@ -508,7 +508,42 @@ function iterativePrePorder(root) {
     }
 }
 
-function createBinaryTree() {
+function iterativePostOrderUsingTwoStack(root){
+    //https://www.geeksforgeeks.org/iterative-postorder-traversal/
+    // 1st iteration = [1]  , 2nd stack =  []
+    // 2nd itr = [2 , 3]      2nd stack = [1]
+    // 3rd itr = [2 , 6 , 7]  2nd stack = [1 , 3] 
+    // 4th itr = [2 , 6]      2nd stack = [1 , 3 , 7]
+    // 5th it = [2]           2nd stack = [1 , 3 , 7 , 6]
+    //6th itr = [4 , 5]       2nd stack = [1 , 3 , 7 , 6 , 2]
+    // 7th itr = [4]          2nd stack = [ 1, 3 , 7 , 6 , 2 , 5]
+    //8th itr = []            2nd stack = [1 , 3 , 7 ,6 ,2 , 5 , 4]
+    
+    let st1 = [];
+    let st2 = [];
+    
+    st1.push(root);
+    
+    while(st1.length){
+    
+        let temp = st1[st1.length-1];
+        st1.pop();
+        st2.push(temp);
+        if(temp.left) st1.push(temp.left);
+        if(temp.right) st1.push(temp.right);
+    
+    }
+    // console.log('postorder traversal' , st2);
+    
+    while(st2.length){
+        let temp = st2[st2.length-1];
+        console.log('data-->' , temp.data);
+        st2.pop();
+    }
+    
+}
+
+function constructBinaryTree() {
 //https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/submissions/1341471422/
 // TC-->O(n^2) since we are traversing through the preorder once and make it root and for 
 // each element we are searching for it in the inorder which takes n time (n*n) 
@@ -540,41 +575,6 @@ function createBinaryTree() {
     }
     let finalTree = constructBinarytree(0, preorder.length - 1);
     console.log('finalTree', finalTree)
-
-}
-
-function iterativePostOrderUsingTwoStack(root){
-//https://www.geeksforgeeks.org/iterative-postorder-traversal/
-// 1st iteration = [1]  , 2nd stack =  []
-// 2nd itr = [2 , 3]      2nd stack = [1]
-// 3rd itr = [2 , 6 , 7]  2nd stack = [1 , 3] 
-// 4th itr = [2 , 6]      2nd stack = [1 , 3 , 7]
-// 5th it = [2]           2nd stack = [1 , 3 , 7 , 6]
-//6th itr = [4 , 5]       2nd stack = [1 , 3 , 7 , 6 , 2]
-// 7th itr = [4]          2nd stack = [ 1, 3 , 7 , 6 , 2 , 5]
-//8th itr = []            2nd stack = [1 , 3 , 7 ,6 ,2 , 5 , 4]
-
-let st1 = [];
-let st2 = [];
-
-st1.push(root);
-
-while(st1.length){
-
-    let temp = st1[st1.length-1];
-    st1.pop();
-    st2.push(temp);
-    if(temp.left) st1.push(temp.left);
-    if(temp.right) st1.push(temp.right);
-
-}
-// console.log('postorder traversal' , st2);
-
-while(st2.length){
-    let temp = st2[st2.length-1];
-    console.log('data-->' , temp.data);
-    st2.pop();
-}
 
 }
 
