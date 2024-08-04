@@ -395,6 +395,18 @@ class Node {
     }
 }
 
+// Node class with horizontal distance data
+class NodeHd{
+
+    constructor(data){
+
+        this.data = data;
+        this.left = this.right = null;
+        this.hd = 0;
+
+    }
+}
+
 function insert(root, data) {
 
     if (!root) {
@@ -759,4 +771,66 @@ function rightView(){
         console.log('ansItr' , ansItr)
     }
     rightRecursiveItr();
+}
+
+function heightOfBT(root) {
+    //https://www.geeksforgeeks.org/find-the-maximum-depth-or-height-of-a-tree/
+    function helper(root) {
+        // base case 
+        if (!root) return 0;
+        // recursively find height of the left subtree
+        let leftSubtreeHeight = helper(root.left);
+        let rightSubtreeHeight = helper(root.right);
+        return Math.max(leftSubtreeHeight, rightSubtreeHeight) + 1;
+    }
+    console.log('height' , helper(root));
+}
+
+function countNodes(){
+    function helper(root){
+        if(!root) return 0;
+        let leftNodes = helper(root.left);
+        let rightNodes = helper(root.right);
+        return leftNodes+rightNodes+1;
+    }
+    console.log(helper(root))
+}
+
+function topViewBT(){
+    //https://www.geeksforgeeks.org/print-nodes-top-view-binary-tree/
+    let rootNode = new NodeHd(1);
+    rootNode.left = new NodeHd(2);
+    rootNode.right = new NodeHd(3);
+    rootNode.left.right = new NodeHd(4);
+    rootNode.left.right.right = new NodeHd(5);
+    rootNode.left.right.right.right = new NodeHd(6);
+    iterativeInOrder(rootNode)
+    let mp =  {};
+    let q = [];
+    q.push(rootNode);
+    while(q.length){
+        let top = q.shift();
+        if(!mp[top.hd]) mp[top.hd] = top.data;
+        if(top.left) {
+            top.left.hd = top.hd-1;
+            q.push(top.left);
+        }
+        if(top.right){
+            top.right.hd = top.hd+1;
+            q.push(top.right);
+        }
+    }
+    console.log('mp' , mp);
+    let  arr = Object.entries(mp).sort((a,b) => a[0]-b[0]);
+    for(const [key , value] of arr){
+        console.log('data-->' , value)
+    }
+    
+
+}
+
+function bottomViewBt(){
+    //https://www.geeksforgeeks.org/bottom-view-binary-tree/
+    // same as top view with one condition change
+    //mp[hd] = data // keeping on updating till the last data
 }
