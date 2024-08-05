@@ -385,6 +385,11 @@ console.log('root', root)
 //3 . traversal - iterative(pre order , post order)
 //4 . construct binary tree from pre order and inorder traversal
 //5 . deletion
+//6 . find -- can be done through any traversal
+//7. left view
+//8. right view
+//9. height of the binary tree
+//10. count nodes in a binary tree
 class Node {
 
     constructor(val) {
