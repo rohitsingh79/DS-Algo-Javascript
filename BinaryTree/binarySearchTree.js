@@ -139,7 +139,90 @@ function deleteInBst() {
     inOrder();
 }
 
-insert();
-inOrder();
-search();
-deleteInBst();
+function recursiveConstructBSTFromPreorder() {
+    //https://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/
+    // const preOrder = [10, 5, 1, 7 , 40 , 50]
+    const preOrder = [30, 20, 10, 15, 25, 40, 50, 45]
+    let pIndex = 0;
+    let n = preOrder.length;
+    function findInd(val, start, end) {
+        let i;
+        for (i = start; i <= end; i++) {
+            if (preOrder[i] > val) return i;
+        }
+        return i;
+    }
+
+    function helper(start, end) {
+
+        if (start > end) return null; // return null when they crossover 
+
+        let node = new Node(preOrder[pIndex]);
+
+        pIndex++;
+
+        if (start === end) return node; // return the node if they are the leaf node
+
+        let nextMax = findInd(node.data, start, end); // find the index of the next starting node return infinity in case the next greater is not present
+
+        node.left = helper(start + 1, nextMax - 1);
+
+        node.right = helper(nextMax, end);
+
+        return node;
+    }
+
+    let ans = helper(0, n - 1);
+    inOrder(ans)
+}
+
+function irtativeConstructBSTFromPreOrder() {
+    // const preOrder = [10, 5, 1, 7 , 40 , 50]
+    const preOrder = [30, 20, 10, 15, 25, 40, 50, 45]
+    let pIndex = 0;
+    let n = preOrder.length;
+
+    function helper() {
+        let root = new Node(preOrder[pIndex]);
+        pIndex++;
+        let st = [];
+        let temp = root
+        while (pIndex < n) {
+            if (preOrder[pIndex] < temp.data) {
+                st.push(temp);
+                temp.left = new Node(preOrder[pIndex]);
+                temp = temp.left;
+                pIndex++;
+            }
+            else {
+                if (!st.length) {
+
+                    temp.right = new Node(preOrder[pIndex]);
+                    temp = temp.right;
+                }
+
+                else {
+                    while (st.length && st[st.length - 1].data < preOrder[pIndex]) {
+                        temp = st.pop();
+                    }
+                    temp.right = new Node(preOrder[pIndex]);
+                    temp = temp.right;
+                }
+
+                pIndex++;
+            }
+
+        }
+        inOrder(root);
+    }
+    helper();
+
+}
+
+// insert();
+// inOrder();
+// search();
+// deleteInBst();
+// recursiveConstructBSTFromPreorder();
+// irtativeConstructBSTFromPreOrder();
+
