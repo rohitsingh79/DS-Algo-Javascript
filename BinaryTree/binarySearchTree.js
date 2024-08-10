@@ -225,6 +225,7 @@ function recurConstructBSTfromPostOrder() {
     // start from right and 
     // when end becomes greater than start return null
     // when the start == end return the leaft node
+    //TC O(n^2)
 
     let postOrder = [1, 7, 5, 50, 40, 10];
 
@@ -264,6 +265,7 @@ function recurConstructBSTfromPostOrder() {
 
 function iterConstructBSTfromPostOrder() {
     //https://www.geeksforgeeks.org/construct-a-binary-search-tree-from-given-postorder/
+    //T.C O(N)
     let postOrder = [1, 7, 5, 50, 40, 10];
     let n = postOrder.length;
     let pIndex = n - 1;
