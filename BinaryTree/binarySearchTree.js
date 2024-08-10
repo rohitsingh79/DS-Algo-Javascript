@@ -5,6 +5,8 @@
 //2.inorder traversal (gives nodes list in sorted order)
 //3.find
 //4.delete
+//5.create a BST from preorder - (recursive and iterative)
+//6. construct a BST from postorder (recursive and iterative)
 
 class Node {
     constructor(val) {
@@ -218,6 +220,88 @@ function irtativeConstructBSTFromPreOrder() {
     helper();
 
 }
+function recurConstructBSTfromPostOrder() {
+    //https://www.geeksforgeeks.org/construct-a-binary-search-tree-from-given-postorder/
+    // start from right and 
+    // when end becomes greater than start return null
+    // when the start == end return the leaft node
+
+    let postOrder = [1, 7, 5, 50, 40, 10];
+
+    let n = postOrder.length;
+
+    let pIndex = n - 1;
+
+    function fIndex(start, end, val) {
+        let i;
+        for (i = start; i >= end; i--) {
+
+            if (postOrder[i] < val) return i
+        }
+        return i;
+    }
+
+    function helper(end, start) {
+
+        if (end > start) return null;
+
+        let node = new Node(postOrder[pIndex]);
+
+        pIndex--;
+
+        if (end === start) return node;
+
+        let nextMinIndex = fIndex(start, end, node.data);
+
+        node.right = helper(nextMinIndex + 1, start - 1);
+        node.left = helper(end, nextMinIndex);
+
+        return node;
+    }
+    let ans = helper(0, n - 1);
+    inOrder(ans);
+}
+
+function iterConstructBSTfromPostOrder() {
+    //https://www.geeksforgeeks.org/construct-a-binary-search-tree-from-given-postorder/
+    let postOrder = [1, 7, 5, 50, 40, 10];
+    let n = postOrder.length;
+    let pIndex = n - 1;
+
+    function helper() {
+        let st = [];
+        let node = new Node(postOrder[pIndex]);
+        pIndex--;
+        let temp = node;
+
+        while (pIndex >= 0) {
+            if (postOrder[pIndex] > temp.data) {
+                // add as a right child
+                temp.right = new Node(postOrder[pIndex]);
+                st.push(temp);
+                temp = temp.right;
+                pIndex--;
+
+            }
+
+            else {
+                // for left child
+                while (st.length && st[st.length - 1].data > postOrder[pIndex]) {
+                    temp = st.pop();
+
+                }
+
+                temp.left = new Node(postOrder[pIndex]);
+                pIndex--;
+                temp = temp.left;
+
+            }
+
+        }
+        inOrder(node);
+    }
+    helper();
+}
 
 // insert();
 // inOrder();
@@ -225,4 +309,6 @@ function irtativeConstructBSTFromPreOrder() {
 // deleteInBst();
 // recursiveConstructBSTFromPreorder();
 // irtativeConstructBSTFromPreOrder();
+// iterConstructBSTfromPostOrder();
+// recurConstructBSTfromPostOrder();
 
