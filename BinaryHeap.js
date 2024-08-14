@@ -93,8 +93,74 @@ function BinaryHeap() {
         console.log('arrHeap after deletion-->', arrHeap);
     }
 
-    deleteFromBinaryHeap();
 
+    function heapify(){
+    // this method is fastest way to create the heap
+    //https://www.geeksforgeeks.org/building-heap-from-array/
+    //T.C O(n)--> better than normal top down create approach
+
+    //             1
+    //           /    \
+    //         3        5
+    //       /  \     /  \
+    //     4      6  13  10
+    //    / \    / \
+    //   9   8  15 17
+
+
+    //             17
+    //           /    \
+    //         15       13
+    //       /  \     /  \
+    //     9      6  5  10
+    //    / \    / \
+    //   4   8  3   1
+
+    let arr = [1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17];
+    let n = arr.length
+
+    function heapify(nodeIndex){
+        // calc the left and right child
+        let left = 2*nodeIndex+1;
+        let right = 2*nodeIndex+2;
+
+        if(left>=n && right>=n) return;
+
+        let largestIndex;
+
+        if(arr[left]>arr[right]) {
+            largestIndex = left;
+            [arr[nodeIndex] , arr[left]] = [arr[left] , arr[nodeIndex]];
+            
+        }
+
+        else {
+            largestIndex = right;
+             [arr[nodeIndex] , arr[right]] = [arr[right] , arr[nodeIndex]]
+        }
+
+        heapify(largestIndex);
+    }
+
+
+    function buildHeap(){
+        // get the last non leaf node index
+        let lastNonLeafNode = n-1
+         lastNonLeafNode = Math.floor((lastNonLeafNode-1)/2);
+        // [1 , 3,, 5, 4 , 6]
+        // start from right to left
+        for(let  i = lastNonLeafNode ; i>=0; i--){
+            heapify(i);
+        }
+    }
+
+    buildHeap();
+
+    console.log('final ans arr-->' ,arr);
+    }
+
+    deleteFromBinaryHeap();
+    heapify();
 
 }
 
