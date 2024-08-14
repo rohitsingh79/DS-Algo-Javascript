@@ -62,19 +62,16 @@ function BinaryHeap() {
         // [20, 10, 15, 5, 1, 12]
 
         let n = arrHeap.length;
-        let lastEle = arrHeap[n - 1];
-        let firstEle = arrHeap[0];
-
-
         [arrHeap[n-1], arrHeap[0]] = [arrHeap[0], arrHeap[n-1]]
 
         arrHeap.pop();
+        const updatedLen = arrHeap.length;
 
         let currentEleIndex = 0;
         let leftChildIndex = (2 * currentEleIndex) + 1;
         let rightChildIndex = (2 * currentEleIndex) + 2;
 
-        while (leftChildIndex < n || rightChildIndex < n) {
+        while (leftChildIndex < updatedLen || rightChildIndex < updatedLen) {
 
             if (arrHeap[leftChildIndex] > arrHeap[rightChildIndex]) {
                 [arrHeap[currentEleIndex], arrHeap[leftChildIndex]] = [arrHeap[leftChildIndex], arrHeap[currentEleIndex]]
