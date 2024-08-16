@@ -165,3 +165,83 @@ function BinaryHeap() {
 }
 
 BinaryHeap();
+
+//https://www.geeksforgeeks.org/how-to-implement-priority-queue-using-heap-or-array/
+
+//-----------priority queue using binary heap--------
+
+
+//1. create a class for maxheap
+//2 . define function for insert , delete , heapifyup , heapifydown
+class maxHeap {
+    constructor() {
+        this.heap = []; // heap is represented using an array 
+    }
+
+    insert(val) {
+        this.heap.push(val);
+        this.heapifyUp(); // heapify by rearranging the elements
+    }
+
+    delete() {
+        let n = this.heap.length;
+        let eleToBeDeleted = this.heap[0];
+        [this.heap[n - 1], this.heap[0]] = [this.heap[0], this.heap[n - 1]]
+        this.heapifyDown();
+        return eleToBeDeleted;
+
+    }
+
+    heapifyUp() {
+        let len = this.heap.length;
+        len = len - 1;
+        let parentIndex = Math.floor((len - 1) / 2);
+        let currentIndex = len;
+        while (parentIndex >= 0 && this.heap[parentIndex] < this.heap[currentIndex]) {
+            [this.heap[parentIndex], this.heap[currentIndex]] = [this.heap[currentIndex], this.heap[parentIndex]]
+            currentIndex = parentIndex;
+            parentIndex = Math.floor((currentIndex - 1) / 2);
+        }
+    }
+
+    heapifyDown() {
+        this.heap.pop();
+        let len = this.heap.length;
+        let parentIndex = 0;
+        let leftChildIndex = (2 * parentIndex) + 1;
+        let rightChildIndex = (2 * parentIndex) + 2;
+        let largestIndex;
+
+        while (leftChildIndex < len) {
+            if (rightChildIndex < len) {
+                if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
+                    largestIndex = rightChildIndex;
+                }
+                else largestIndex = leftChildIndex;
+            }
+            else {
+                if (this.heap[parentIndex] < this.heap[leftChildIndex]) { // edge case when there is only one left child left
+                    largestIndex = leftChildIndex;
+                }
+                else break;
+            }
+
+            [this.heap[parentIndex], this.heap[largestIndex]] = [this.heap[largestIndex], this.heap[parentIndex]]
+            parentIndex = largestIndex;
+            leftChildIndex = (2 * parentIndex) + 1;
+            rightChildIndex = (2 * parentIndex) + 2;
+        }
+    }
+}
+
+
+//Q1: [5 , 10 , 6 , 20 , 15 , 30 , 12]
+//soln: [30, 15, 20, 5,10,  6, 12]
+const maxHeap1 = new maxHeap();
+maxHeap1.insert(5)
+maxHeap1.insert(10)
+maxHeap1.insert(6)
+maxHeap1.insert(20)
+maxHeap1.insert(15)
+maxHeap1.insert(30)
+maxHeap1.insert(12)
