@@ -173,6 +173,7 @@ BinaryHeap();
 
 //1. create a class for maxheap
 //2 . define function for insert , delete , heapifyup , heapifydown
+//3 . create a priority queue class to insert , delete
 class maxHeap {
     constructor() {
         this.heap = []; // heap is represented using an array 
@@ -237,11 +238,39 @@ class maxHeap {
 
 //Q1: [5 , 10 , 6 , 20 , 15 , 30 , 12]
 //soln: [30, 15, 20, 5,10,  6, 12]
-const maxHeap1 = new maxHeap();
-maxHeap1.insert(5)
-maxHeap1.insert(10)
-maxHeap1.insert(6)
-maxHeap1.insert(20)
-maxHeap1.insert(15)
-maxHeap1.insert(30)
-maxHeap1.insert(12)
+// const maxHeap1 = new maxHeap();
+// maxHeap1.insert(5)
+// maxHeap1.insert(10)
+// maxHeap1.insert(6)
+// maxHeap1.insert(20)
+// maxHeap1.insert(15)
+// maxHeap1.insert(30)
+// maxHeap1.insert(12)
+
+class PriorityQueue {
+    constructor(){
+        this.heap = new maxHeap();
+    }
+
+    insert(val){
+        this.heap.insert(val);
+    }
+
+    delete(){
+        return this.heap.delete();
+    }
+}
+
+const pq = new PriorityQueue();
+console.log('pq' , pq)
+pq.insert(5)
+pq.insert(10)
+pq.insert(6)
+pq.insert(20)
+console.log('pq after insertion' , pq)
+console.log('value deleted' , pq.delete());
+console.log('value deleted' , pq.delete());
+console.log('pq after deletion' , pq)
+
+
+
