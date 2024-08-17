@@ -1,5 +1,8 @@
 //---------------- Binary Heap - (complete binary tree either max or min heap)-------------
 // 1. consruct binary heap from array (logn time)
+//2 . delete from a binary heap (by deleting root and heapifying) (logn time)
+//3 . heapify fn to heapify a binary tree bu just using non leaf nodes (O(n))
+//4 . implement a class to create a priority queue opeartion using binary heap - https://www.geeksforgeeks.org/how-to-implement-priority-queue-using-heap-or-array/
 
 function BinaryHeap() {
     // priority queue  uses binary tree , to prioritze the priority
