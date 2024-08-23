@@ -62,3 +62,98 @@ function DSU() {
 }
 
 console.log(DSU());
+
+// edges - (0 ,1) (2,3) (1,2) (0,4) (4,3)
+
+
+// [-1 , -1 , -1 , -1 , -1]
+// [0 , 0 ,0 ,0 ,0]
+
+// [1 , -1 , -1 , -1 , -1]   0-->1
+//[0 , 1 ,0 ,0 ,0]
+
+// [1 , -1 , 3 , -1 , -1]   2-->3
+//[0 , 1 ,0 ,1 ,0]
+
+// [1 , 3 , 3 , -1 , -1]   1-->2
+//[0 , 1 ,0 ,2 ,0]
+
+
+// [3 , 3 , 3 , -1 , 3]   0-->4
+//[0 , 1 ,0 ,3 ,0]
+
+
+// [3 , 3 , 3 , -1 , 3]   4-->3  4 and 3 both pointing to same node so there is a cycle
+//[0 , 1 ,0 ,3 ,0]
+
+
+// optimized approach to find union by rank and compression
+
+function DSUOptimized(){
+
+    const  edges = [[0 ,1] , [2,3] , [1,2] , [0,4] , [4,3]]
+
+    class node {
+        constructor() {
+            this.parent = -1;
+            this.rank = 0;
+        }
+    }
+
+    let dsuf = [];
+
+
+    for(let i =0 ; i<5; i++){
+
+        dsuf.push(new node());
+
+    }
+
+    function find(vertex){
+        // recursively update the absolute parent of vertex and replace the value
+        if(dsuf[vertex].parent === -1) return vertex; // to return at the root level
+
+        dsuf[vertex].parent = find(dsuf[vertex].parent); 
+
+        return dsuf[vertex].parent // to return the intermediate parent
+
+    } 
+
+    function union(from , to){
+
+        // find the absolute parent of from and to
+        let fromParent = find(from);
+        let toParent = find(to);
+
+        if(fromParent === toParent) return true
+        // check the rank which allow to cnstruct a tree with less rank which help us in finding the node in short time for  find function
+
+        else if(dsuf[fromParent].rank>dsuf[toParent].rank){   // assign the node to the tree that has more height
+            dsuf[toParent].parent = from;
+        }
+
+        else if(dsuf[toParent].rank>dsuf[fromParent].rank){
+            dsuf[fromParent].parent = to;
+        }
+
+        else {dsuf[fromParent].parent = toParent; dsuf[toParent].rank +=1;}   // similar rank assign to one of node and increase height
+    }
+
+    for(const edge of edges){
+
+        console.log('edge', edge)
+
+        const [from , to] = edge
+
+        if(union(from , to)){
+            console.log('dsuf' ,dsuf)
+            return true;
+        }
+    }
+
+    return false;
+
+   
+}
+
+DSUOptimized();
