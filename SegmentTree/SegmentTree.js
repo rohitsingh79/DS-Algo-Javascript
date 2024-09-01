@@ -63,5 +63,35 @@ function findRangeSum() {
     console.log('ans', ans);
 }
 
+function updateIndex(){
+
+    const updatValBy = 8;
+    const indexToUpdate = 3; // in the main arr [1 , 2 , 5 , 6 , 7  , 9 ]
+    arr[indexToUpdate]+=updatValBy; // update the index
+
+
+    function helper(ind , treeLeftIndex , treeRightIndex , currIndex){
+
+        // base case
+        if(ind<treeLeftIndex || ind > treeRightIndex) return;
+
+        // update the value as you traverse down
+
+        binaryTreeArr[currIndex]+=updatValBy;
+
+        if(treeLeftIndex!==treeRightIndex){
+            let mid = getMid(treeLeftIndex , treeRightIndex);
+            helper(ind , treeLeftIndex , mid , (2*currIndex)+1);
+            helper(ind , mid+1 , treeRightIndex , (2*currIndex)+2);
+             
+        }
+    }
+
+    helper(indexToUpdate , 0 , arr.length-1 , 0)
+    console.log('binaryTreeArr' , binaryTreeArr)
+
+}
+
 constructSegmentTree();
 findRangeSum()
+updateIndex();
