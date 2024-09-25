@@ -1,3 +1,7 @@
+// https://github.com/datastructures-js/priority-queue/tree/master
+//  package  for priority queue data structure 
+
+
 //---------------- Binary Heap - (complete binary tree either max or min heap)-------------
 // 1. consruct binary heap from array (logn time)
 //2 . delete from a binary heap (by deleting root and heapifying) (logn time)
