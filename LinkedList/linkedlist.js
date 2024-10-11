@@ -159,3 +159,50 @@ function isPalindrome(list){
 }
 // console.log(isPalindrome(palindromeList));
 
+
+//**********************************************************************************************************************
+// reverse the linked list in place 
+// using 3 pointers prev , curr and next
+var reverseBetween = function(head, left, right) {compcomp
+    
+    //create the dummy node
+    let dummy = new ListNode(0);
+    dummy.next = head;
+    let tail = dummy;
+    
+    // traverse till you find the left position
+    let pos = 1;
+    let curr = head;
+    let start;
+    let prev=null;
+    while(pos<=right){
+        
+        // reach to the left
+        if(pos<left){
+            tail = curr;
+            curr = curr.next;
+            pos++;
+        } 
+        else{
+        start = curr;
+        // reverse the list 
+            while(pos<=right){
+                let nextNode = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = nextNode;
+                pos++;
+            } // including left and right
+        }
+        
+       
+    }
+    
+    //connect the nodes
+    tail.next = prev;
+    start.next = curr;
+    
+    return dummy.next;
+};
+
+
