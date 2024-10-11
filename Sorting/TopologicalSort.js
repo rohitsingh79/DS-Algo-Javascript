@@ -13,6 +13,9 @@
 
 function topologicalSort(edges){
 
+    // TC. O(V+E)
+    // S.C O(V)
+
     const graph = new Map();
 
     const visited = new Array(edges.length)
