@@ -569,3 +569,161 @@ for(const key in arr){  // in can be used for both arr and obj
 
 // }
 
+
+
+//https://dev.to/vijayprwyd/polyfill-for-promises-1f0e
+//https://roadsidecoder.hashnode.dev/javascript-interview-questions-promises-and-its-polyfills
+
+// Nested callbacks leading to callback hell
+// function task1(callback) {
+//   setTimeout(() => {
+//     console.log("Task 1 completed");
+//     callback();
+//   }, 1000);
+// }
+
+// function task2(callback) {
+//   setTimeout(() => {
+//     console.log("Task 2 completed");
+//     callback();
+//   }, 1000);
+// }
+
+// function task3(callback) {
+//   setTimeout(() => {
+//     console.log("Task 3 completed");
+//     callback();
+//   }, 1000);
+// }
+
+// // Nested structure
+// task1(() => {
+//   task2(() => {
+//     task3(() => {
+//       console.log("All tasks completed!");
+//     });
+//   });
+// });
+
+// function task1() {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       console.log("Task 1 completed");
+//       resolve();
+//     }, 1000);
+//   });
+// }
+
+// function task2() {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       console.log("Task 2 completed");
+//       resolve();
+//     }, 1000);
+//   });
+// }
+
+// function task3() {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       console.log("Task 3 completed");
+//       resolve();
+//     }, 1000);
+//   });
+// }
+
+// task1()
+//   .then(task2)
+//   .then(task3)
+//   .then(() => console.log("All tasks completed!"));
+
+
+//   async function executeTasks() {
+//     await task1();
+//     await task2();
+//     await task3();
+//     console.log("All tasks completed!");
+//   }
+  
+//   executeTasks();
+
+  //Differences Between Promises and Async/Await:
+  Promises
+  //1. Great for chaining multiple asynchronous calls.
+  //Async Await
+  //2.Easier to write sequential asynchronous calls.
+
+
+
+  //---------------------------------------------------------------------------------------------------
+  // Polyfill of promise
+  // function promisePoly(executor) {
+  //   let onResolve;
+  //   let val;
+  //   let fullfilled = false;
+  //   let called = false;
+  
+  
+  //   // fullfilled is called when it goes inside the resolve function
+  //   // called is used when the resolved function has been called
+  
+  //   // step1: execute the executor
+  //   // step2: declare the resolve function
+  //   // step3: declare a then method on the this keyword
+  //   // step4: assign the callback to onResolve variable
+  
+  //   function resolve(param) {
+  //     val = param;
+  //     fullfilled = true;
+  //     if (typeof onResolve === "function") {
+       
+  //       onResolve(param);
+  
+  //       called = true;
+  //     }
+  //   }
+  
+  //   this.then = function (callback) {
+  //     onResolve = callback;
+  
+  //     if (fullfilled && !called) {
+  //       onResolve(val);
+  //     }
+  
+  //     return this;
+  //   };
+  
+  //   executor(resolve);
+  // }
+  
+  // const promise1 = new promisePoly((resolve, reject) => {
+  //   console.log("1");
+  //   setTimeout(() => resolve("Rohit"), 1000);
+  //   console.log("2");
+  // });
+  
+  // promise1.then((res) => console.log("response from promise", res));
+  
+  
+  
+  // const promise2 = new promisePoly((resolve) => {
+  
+  //   resolve('instantly resolved')
+  // })
+  
+  // promise2.then((res) => console.log(res))
+  
+  
+  // o/p: 
+  // 1
+  // 2
+  // instantly resolved
+  // response from promise Rohit
+  
+
+
+  
+  
+
+
+
