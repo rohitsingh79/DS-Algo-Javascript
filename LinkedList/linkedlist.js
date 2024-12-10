@@ -206,3 +206,21 @@ var reverseBetween = function(head, left, right) {compcomp
 };
 
 
+
+//
+// Applications of Linked Lists:
+// Linked Lists can be used to implement stacks, queue, deque, sparse matrices and adjacency list representation of graphs.
+// Dynamic memory allocation in operating systems and compilers (linked list of free blocks).
+// Manipulation of polynomials
+// Arithmetic operations on long integers.
+// In operating systems, they can be used in Memory management, process scheduling (for example circular linked list for round robin scheduling) and file system.
+// Algorithms that need to frequently insert or delete items from large collections of data.
+// LRU cache, which uses a doubly linked list to keep track of the most recently used items in a cache.
+// Applications of Linked Lists in real world: 
+// The list of songs in the music player are linked to the previous and next songs. 
+// In a web browser, previous and next web page URLs can be linked through the previous and next buttons (Doubly Linked List)
+// In image viewer, the previous and next images can be linked with the help of the previous and next buttons (Doubly Linked List)
+// Circular Linked Lists can be used to implement things in round manner where we go to every element one by one.
+// Linked List are preferred over arrays for implementations of Queue and Deque data structures because of fast deletions (or insertions) from the front of the linked lists.
+
+
