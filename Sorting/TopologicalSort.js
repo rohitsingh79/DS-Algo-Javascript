@@ -1,7 +1,8 @@
 // ############################################## topological sorting#################################################
 
 //https://www.geeksforgeeks.org/topological-sorting/
-// it is done only for directed acyclic graph 
+//https://www.youtube.com/watch?v=qe_pQCh09yU&ab_channel=Techdose
+// it is done only for directed acyclic graph
 
 // 1 . create an adjacency list and visited node list
 // 2. iterate through each node and check for its dependency recurisively (dfs)
@@ -10,76 +11,89 @@
 // 5. if the node is not visited and has futher depenedency , iterate through those and perform steps 3 to steps5
 // 6 . return the stack which reperesent the elements in the topological sort
 
+//leetcode.com/problems/course-schedule-ii/description/
+function topologicalSort(edges) {
+  // TC. O(V+E)
+  // S.C O(V)
 
-function topologicalSort(edges){
+  const graph = new Map();
 
-    // TC. O(V+E)
-    // S.C O(V)
+  const visited = new Array(edges.length);
 
-    const graph = new Map();
+  let stack = [];
 
-    const visited = new Array(edges.length)
+  for (const [node, edge] of edges) {
+    if (graph.has(node)) {
+      let value = graph.get(node);
 
-    let stack = [];
+      value.push(edge);
 
-    for (const [node , edge] of edges){
+      graph.set(node, value);
+    } else graph.set(node, [edge]);
+  }
 
-        if(graph.has(node)){
+  console.log("graph", graph);
 
-            let value = graph.get(node);
+  function helper(node) {
+    // dfs algorithm
 
-            value.push(edge);
+    if (visited[node] === 1) return false;
+    if (visited[node] === 2) return true;
 
-            graph.set(node , value);
+    visited[node] = 1;
 
+    let edges = graph.get(node);
 
-        }
-
-        else graph.set(node , [edge])
+    if (edges) {
+      for (const node of edges) {
+        if (!helper(node)) return false;
+      }
     }
 
-    console.log('graph' , graph)
+    visited[node] = 2;
 
+    stack.push(node);
 
-    function helper(node){ // dfs algorithm 
+    return true;
+  }
 
-        if(visited[node] === 1) return false;
-        if(visited[node] === 2) return true;
+  for (let i = 0; i < edges.length; i++) {
+    if (!helper(i)) return [];
+  }
 
-        visited[node] = 1;
-
-        let edges = graph.get(node);
-
-        if(edges){
-
-            for(const node of edges){
-
-                if(!helper(node)) return false;
-            }
-
-        }
-
-        visited[node] = 2;
-
-        stack.push(node);
-
-        return true;
-
-
-    }
-
-    for(let i = 0; i<edges.length; i++){
-        if(!helper(i)) return []
-    }
-
-    return stack.reverse();
-
-
-
+  return stack.reverse();
 }
 
-const edges = [[0, 1], [1, 2], [3, 1], [3, 2]];
+const edges = [
+  [0, 1],
+  [1, 2],
+  [3, 1],
+  [3, 2],
+];
 
-console.log(topologicalSort(edges))
+console.log(topologicalSort(edges));
 
 // ans [ 3, 0 , 1 , 2 ]
+
+
+// pseudo code
+
+// 1. { 0: [1 ,2] }
+//2 . {1:[2 , 3]}
+// 3. {2:[3 , 4]}
+
+for(let i = 0; i to 4 ; i++){
+
+    helper(i)
+
+
+    function helper(i){
+
+        // get the value from map
+        // iterate
+        for(let i of eddged){
+            if(visite)
+        }
+    }
+}
+
