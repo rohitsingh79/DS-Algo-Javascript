@@ -1,3 +1,7 @@
+//https://takeuforward.org/data-structure/longest-common-substring-dp-27/
+// check the substrings column wise
+
+
 // var findLength = function(nums1, nums2) {
     
 //     let n = nums1.length;

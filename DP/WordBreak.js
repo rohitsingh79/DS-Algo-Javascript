@@ -1,5 +1,9 @@
 
 //word break problem
+// using dp , iterate the string and check if the word is present in the set and end of the word is reached 
+
+
+
 var wordBreak = function(s, wordDict) {
     // create a hashmap for dictionary
     let set = new  Set(wordDict);

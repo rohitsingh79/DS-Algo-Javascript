@@ -4,6 +4,9 @@
 //https://www.youtube.com/watch?v=a9WoSN2tN8o
 
 
+// leetcode problem
+
+
 // 1. construct segment tree
 // 2. find range sum
 

@@ -57,6 +57,8 @@ function BinaryHeap() {
 
     function deleteFromBinaryHeap() {
 
+        // heapify down method
+
         //https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/
 
         // [30, 20, 15, 5, 10, 12, 1]

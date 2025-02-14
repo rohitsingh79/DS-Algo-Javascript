@@ -2,9 +2,9 @@
 //https://www.geeksforgeeks.org/trie-insert-and-search/
 //tree like data structure used for storing dynamic set of strings
 // efficient retrieval ans storage of keys in large dataset
-// 1. insert in a trie 
-// 2. search in a trie
-// 3. delete in a trie
+// 1. insert in a trie  O(1)
+// 2. search in a trie  O(N)
+// 3. delete in a trie 
 // All take O(n) operations
 
 class TrieNode {
@@ -78,7 +78,7 @@ function deleteKey(root, key) {
 
             if (root.wordEnd) root.wordEnd = false; // if it is not a leaf node
 
-            if (isAllChildrenEmpty(root)) root = null;
+            if (isAllChildrenEmpty(root)) root = null;   // no other node can be formed
 
             return root;
         }
