@@ -143,6 +143,7 @@ function deleteInBst() {
 
 function recursiveConstructBSTFromPreorder() {
     //https://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversa/
+    // find the next max of the root and then divide
     // const preOrder = [10, 5, 1, 7 , 40 , 50]
     const preOrder = [30, 20, 10, 15, 25, 40, 50, 45]
     let pIndex = 0;

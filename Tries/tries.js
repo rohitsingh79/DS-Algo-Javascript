@@ -84,7 +84,7 @@ function deleteKey(root, key) {
         }
         const charIndex = key[index].charCodeAt(0) - 'a'.charCodeAt(0);
         root.child[charIndex] = helper(root.child[charIndex], key, index + 1)
-        if (isAllChildrenEmpty(root) && !root.wordEnd) root = null;
+        if (isAllChildrenEmpty(root) && !root.wordEnd) root = null;   // ex: geeks and geek
         return root;
     }
 

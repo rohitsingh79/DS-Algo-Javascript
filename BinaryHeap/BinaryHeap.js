@@ -8,6 +8,8 @@
 //3 . heapify fn to heapify a binary tree bu just using non leaf nodes (O(n))
 //4 . implement a class to create a priority queue opeartion using binary heap - https://www.geeksforgeeks.org/how-to-implement-priority-queue-using-heap-or-array/
 
+/*note: keep the nodes as far as left possible */
+
 function BinaryHeap() {
     // priority queue  uses binary tree , to prioritze the priority
     // based on min or max value
@@ -58,6 +60,8 @@ function BinaryHeap() {
     function deleteFromBinaryHeap() {
 
         // heapify down method
+        //1. remove the top element and put the last element
+        //2. heapif down after that
 
         //https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/
 
