@@ -13,6 +13,8 @@
 
 // x = 565610;
 
+//https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/
+
 var minOperations = function(nums, x) {
     let i = 0;
     let j= 0;

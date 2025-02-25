@@ -4,6 +4,8 @@
 
 // variable sliding window problem
 
+//https://leetcode.com/problems/minimum-size-subarray-sum/description/
+
 var minSubArrayLen = function(target, nums) {
     
     let i =0;

@@ -1,3 +1,5 @@
+//https://leetcode.com/discuss/interview-question/3100856/Fixed-Size-Sliding-Window-(Important-Questions-with-Solutions)
+
 // find the first negative in each window of size k ; 
 // We are using a sliding window for it to optimise it.
 // We take i and j at the start of the array.

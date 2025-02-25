@@ -5,6 +5,8 @@
 // console.log(...m.values());
 
 // sliding window problem
+// https://www.youtube.com/watch?v=gqXU1UyA8pk&ab_channel=NeetCode
+//https://leetcode.com/problems/longest-repeating-character-replacement/description/
 
 var characterReplacement = function(s, k) {
     
@@ -16,7 +18,7 @@ var characterReplacement = function(s, k) {
 
     while(right<s.length){
 
-        // create the hashmap of the current windoe
+        // create the hashmap of the current window
         map.has(s[right])?map.set(s[right],map.get(s[right])+1):map.set(s[right],1);
         // if window size - max char is less than k , keep updating the res
         let max = Math.max(...map.values());
@@ -40,3 +42,7 @@ var characterReplacement = function(s, k) {
 };
 
 characterReplacement('ABAA',0)
+// example code 
+//ABABBA  K = 2
+// 6-3 B: 3
+//     A:3 , slide

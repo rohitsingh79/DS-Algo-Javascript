@@ -2,6 +2,8 @@
 // Output: true
 // Explanation: s2 contains one permutation of s1 ("ba").
 
+//https://leetcode.com/problems/minimum-size-subarray-sum/description/
+
 var checkInclusion = function(s1, s2) {
     
     let windowSize = s1.length;

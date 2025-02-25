@@ -1,5 +1,7 @@
 
-// to be done 
+//https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/
+//https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/solutions/4140333/full-explanation-3-approaches-best-solution-beats-100-0-users/
+// use divide and conquer
 
 var longestSubstring = function(s, k) {
     let n = s.length;

@@ -3,6 +3,7 @@
  * @param {number} k
  * @return {number}
  */
+//https://leetcode.com/problems/subarrays-with-k-different-integers/description/
  var subarraysWithKDistinct = function(nums, k) {
     function countDistinct(nums,k){
         let i = 0;

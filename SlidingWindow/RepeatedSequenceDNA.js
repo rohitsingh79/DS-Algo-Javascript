@@ -1,5 +1,6 @@
 // Input: s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"
 // Output: ["AAAAACCCCC","CCCCCAAAAA"]
+//https://leetcode.com/problems/repeated-dna-sequences/description/
 
 
 var findRepeatedDnaSequences = function(s) {

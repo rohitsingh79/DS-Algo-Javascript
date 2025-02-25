@@ -3,6 +3,8 @@
 // Explanation: "cbebebe" is the longest 
 // substring with K distinct characters.
 
+//https://www.geeksforgeeks.org/find-the-longest-substring-with-k-unique-characters-in-a-given-string/
+
 function longestSubstring(arr , k){
 
     let i=0;
@@ -32,7 +34,7 @@ function longestSubstring(arr , k){
         }
         else if(hMap.size==k){
             // check if the current window is max
-            max = Math.max(max , j-i+1);
+            max = Math.max(max , j-i+1); //update the max size
             j++;
             console.log(hMap);
 
