@@ -1,64 +1,44 @@
+function merge(nums,mid,left,right){
+    let i = left;
+    let j = mid+1;
+    let arrLen = right-left+1
+    let temp = new Array(arrLen);
+    let k = 0;
+    while(i<=mid && j<=right){
+        // check if nums[i] is greate or smaller than nums[j]
+        if(nums[i]<=nums[j]){
+            temp[k] = nums[i];
+            k++;
+            i++;
+        }
+        else{
+            temp[k] = nums[j];
+            k++;
+            j++;
+        }
+    }
 
-// var sortArray = function(nums) {
+    //add the remaining elemnts
+    // for i
+    while(i<=mid){
+        temp[k] = nums[i];
+        k++;
+        i++;
+    }
+    while(j<=right){
+        temp[k] = nums[j];
+        k++;
+        j++;
+    }
+    k=0;
 
-//     // merge sort
-//     function merge(nums,mid,left,right){
-//         let i = left;
-//         let j = mid+1;
-//         let arrLen = right-left+1
-//         let temp = new Array(arrLen);
-//         let k = 0;
-//         while(i<=mid && j<=right){
-//             // check if nums[i] is greate or smaller than nums[j]
-//             if(nums[i]<=nums[j]){
-//                 temp[k] = nums[i];
-//                 k++;
-//                 i++;
-//             }
-//             else{
-//                  temp[k] = nums[j];
-//                 k++;
-//                 j++;
-//             }
-//         }
-        
-//         //add the remaining elemnts
-//         // for i
-//         while(i<=mid){
-//             temp[k] = nums[i];
-//             k++;
-//             i++;
-//         }
-//         while(j<=right){
-//             temp[k] = nums[j];
-//             k++;
-//             j++;
-//         }
-//         k=0;
-//         // make the changes in the original array
-//         for(let i=left;i<=right;i++){
-//             nums[i] = temp[k];
-//             k++;
-//         }
-//     }
-    
-//     function mergeSort(nums,left,right){
-//         if(left<right){
-//             // calculate the mid
-//             let mid = parseInt((left+right)/2);
-//             console.log('mid',mid);
-//             mergeSort(nums,left,mid);
-//             mergeSort(nums,mid+1,right);
-//             merge(nums,mid,left,right);
-//         }
-      
-//     }
-//     mergeSort(nums,0,nums.length-1);
-//     return nums;
-    
-// };
-
-// console.log(sortArray([38,27,43,3,9,82,10]))
+    console.log('temp' , temp)
+    // make the changes in the original array
+    for(let i=left;i<=right;i++){
+        nums[i] = temp[k];
+        k++;
+    }
+}
 
 
 var mergeSorting = function(nums1){
@@ -157,6 +137,55 @@ var mergeSorting = function(nums1){
     const sum = trackArr.reduce((sum,item) => sum+item,0);
     console.log('sum',sum);
     return nums1;
+}
+
+var merge = function (arr, low, mid, high) {
+    let temp = [], l = low, r = mid + 1;
+    while (l <= mid && r <= high) {
+        if (arr[l] <= arr[r]) {
+            temp.push(arr[l]);
+            l++;
+        } else {
+            temp.push(arr[r]);
+            r++;
+        }
+    }
+    while (l <= mid) {
+        temp.push(arr[l]);
+        l++;
+    }
+    while (r <= high) {
+        temp.push(arr[r]);
+        r++;
+    }
+    for (let i = low; i <= high; i++) {
+        arr[i] = temp[i - low];
+    }
+};
+
+const countPairs = (arr, low, mid, high) => {
+    let r = mid + 1, count = 0;
+    for (let i = low; i <= mid; i++) {
+        while (r <= high && arr[i] > 2 * arr[r]) r++;
+        count += r - (mid + 1);
+    }
+    return count;
+}
+
+const mergeSort = (arr, low, high) => {
+    let count = 0;
+    if (low < high) {
+        let mid = Math.floor((low + high) / 2);
+        count += mergeSort(arr, low, mid);
+        count += mergeSort(arr, mid + 1, high);
+        count += countPairs(arr, low, mid, high);
+        merge(arr, low, mid, high);
+    }
+    return count;
+}
+
+var reversePairs = function (nums) {
+    return mergeSort(nums, 0, nums.length - 1);
 }
 
 console.log(mergeSorting([3,1,2]));

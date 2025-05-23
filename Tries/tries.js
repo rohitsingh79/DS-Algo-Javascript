@@ -112,3 +112,81 @@ console.log('check baa-->' ,searchKey(trie, 'baa'))
 console.log('check geeks-->' ,searchKey(trie, 'geeks'))
 console.log('check geek-->' ,searchKey(trie, 'geek'))
 console.log('check zoo-->' ,searchKey(trie, 'zoo'))
+
+ 
+// ********************************** Alternative approach *************************************
+class TrieNode{
+
+    constructor(){
+        this.children = {};
+        this.end = false;
+    }
+}
+
+
+let Trie = function() {
+
+    this.root = new TrieNode();
+};
+
+
+/**
+ * @param {string} word
+ * @return {void}
+ */
+Trie.prototype.insert = function(word) {
+    let  curr = this.root;
+    for(const w of word){
+
+        if(!curr.children[w]){
+            curr.children[w] = new TrieNode();
+
+        }
+        curr = curr.children[w];
+    }
+
+    curr.end = true;
+
+};
+
+/**
+ * @param {string} word
+ * @return {boolean}
+ */
+Trie.prototype.search = function(word) {
+
+    let curr = this.root;
+    for(const w of word){
+        if(!curr.children[w]) return false;
+
+        curr = curr.children[w]; // move forward in the trie
+
+    }
+
+    return curr.end? true:false
+
+
+};
+
+/**
+ * @param {string} prefix
+ * @return {boolean}
+ */
+Trie.prototype.startsWith = function(prefix) {
+
+   let curr = this.root
+    for(const p of prefix){
+        if(!curr.children[p]) return false;
+        curr = curr.children[p]; // advance to the nex
+    }
+    return true
+
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * var obj = new Trie()
+ * obj.insert(word)
+ * var param_2 = obj.search(word)
+ * var param_3 = obj.startsWith(prefix)
+ */

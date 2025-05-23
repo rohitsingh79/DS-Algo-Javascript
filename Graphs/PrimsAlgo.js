@@ -32,7 +32,7 @@ function addEdge(u, v, w) {
 
 }
 
-function printEdge() {
+function printEdge() {2
 
 
     for (let i = 1; i < adjMatrix.length; i++) {
@@ -159,4 +159,91 @@ addEdge(5, 7, 18);
 addEdge(3, 2, 12);
 addEdge(2, 7, 10);
 prims();
+
+
+//----------------------------------------Prims using Priority queue-------------------------------------//
+function Prims(graph){
+    let n = graph.length;
+    const dist = Array(n).fill(10000);
+    const visited = Array(n).fill(false);
+    let cost1 = 0;
+    const pq = new MinPriorityQueue((x) => x[0]) // 0th will be the distance take the least one
+    pq.push([0 , 1]);  // distance , vertex
+    dist[1] = 0;
+
+    while(!pq.isEmpty()){
+
+        const top = pq.dequeue();
+        let weight = top[0]; // current ditance weight
+        let u = top[1]; // current elmeent 
+
+
+        // inlcude the weight in the cost
+        if(visited[u]) continue;
+
+        
+        cost1+=weight;
+        visited[u] = true;
+
+        for(const edge of graph[u]){
+
+            const toEdgeVertex =  edge[0];
+            const distanceToVertex = edge[1];
+
+            if(!visited[toEdgeVertex]){
+
+                if(distanceToVertex < dist[toEdgeVertex]){
+                    dist[toEdgeVertex] = distanceToVertex // update the distance
+                    pq.enqueue([distanceToVertex , toEdgeVertex])
+                }
+            }
+        }
+
+    }
+
+    console.log('cost of the new created MST' , cost1)
+    console.log('dist' , dist)
+
+}
+
+
+const adjacenyList = [
+  [],
+  [
+    [2, 28],
+    [6, 10],
+  ],
+  [
+    [1, 28],
+    [7, 14],
+    [3, 16],
+  ],
+  [
+    [2, 16],
+    [4, 12],
+  ],
+  [
+    [5, 22],
+    [7, 18],
+    [3, 12],
+  ],
+  [
+    [6, 25],
+    [7, 24],
+  ],
+  [
+    [1, 10],
+    [5, 25],
+  ],
+  [
+    [5, 24],
+    [4, 18],
+    [2, 14],
+  ],
+];
+
+
+// adjacency list --> vertex , distance
+
+Prims(adjacenyList)
 
