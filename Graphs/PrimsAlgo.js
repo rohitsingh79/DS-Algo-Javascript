@@ -230,6 +230,7 @@ const adjacenyList = [
   [
     [6, 25],
     [7, 24],
+    [4 , 22]
   ],
   [
     [1, 10],
@@ -241,7 +242,6 @@ const adjacenyList = [
     [2, 14],
   ],
 ];
-
 
 // adjacency list --> vertex , distance
 
