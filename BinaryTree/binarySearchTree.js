@@ -179,7 +179,7 @@ function recursiveConstructBSTFromPreorder() {
     inOrder(ans)
 }
 
-function irtativeConstructBSTFromPreOrder() {
+function iterativeConstructBSTFromPreOrder() {
     // const preOrder = [10, 5, 1, 7 , 40 , 50]
     const preOrder = [30, 20, 10, 15, 25, 40, 50, 45]
     let pIndex = 0;
